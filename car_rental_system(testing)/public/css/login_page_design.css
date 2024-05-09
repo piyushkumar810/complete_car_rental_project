@@ -36,7 +36,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    overflow: hidden;
+    /* transform: scale(0); */
     transition: height .2s ease;
 }
 
@@ -52,17 +53,25 @@ body{
 
 .container .form-box.login{
     /* display: none; */
+    transition: transform .18s ease;
+    transform: translateX(0);
     
 }
 
 .container.active .form-box.login{
     transition: none;
-    transform: translateX(400px);
+    transform: translateX(-400px);
 }
 
 .container .form-box.register{
     position: absolute;
+    transition: none;
     transform: translateX(400px);
+}
+
+.container.active .form-box.register{
+    transition: transform .18s ease;
+    transform: translateX(0);
 }
 
 .form-box h2{
