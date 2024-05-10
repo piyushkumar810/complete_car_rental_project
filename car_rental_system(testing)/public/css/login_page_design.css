@@ -32,18 +32,18 @@ body{
     border: 2px solid rgb(4, 4, 4);
     border-radius: 20px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 30px rgba(214, 252, 2, 0.265);
+    box-shadow: 0 0 30px rgba(214, 252, 2, 0.29);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     /* transform: scale(0); */
-    transition: height .2s ease;
+    transition: height .3s ease;
 }
 
 /* added active class through java Script */
 .container.active{
-    height: 520px;
+    height: 550px;
 }
 
 .container .form-box{
@@ -55,7 +55,6 @@ body{
     /* display: none; */
     transition: transform .18s ease;
     transform: translateX(0);
-    
 }
 
 .container.active .form-box.login{
@@ -67,6 +66,7 @@ body{
     position: absolute;
     transition: none;
     transform: translateX(400px);
+    /* padding: 20px; */
 }
 
 .container.active .form-box.register{
@@ -86,7 +86,7 @@ body{
     width: 100%;
     height: 50px;
     border-bottom: 2px solid var(--main-color);
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .input-box label{
@@ -112,9 +112,10 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    font-size: 16px;
-    color: var(--bg-color);
-    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    /* font-weight: 600; */
     padding: 0 35px 0 5px;
 }
 
@@ -131,23 +132,23 @@ body{
     font-size: 14px;
     color: var(--text-color);
     font-weight: 500;
-    margin: -15px 0 15px;
+    margin: 8px 0 8px;
     display: flex;
     justify-content: space-between;
 }
 
 .remember-forgot label input{
-    accent-color: #162938;
+    accent-color: #575725;
     margin-right: 3px;
 }
 
 .remember-forgot a{
-    color: #162938;
+    color: #e0f48e;
     text-decoration: none;
 }
 
-.remember-forgot{
-    text-decoration: underline;
+.remember-forgot a:hover{
+    color: yellow;
 }
 
 .btn{
@@ -168,11 +169,15 @@ body{
     color: #162938;
     text-align: center;
     font-weight: 500;
-    margin: 25px 0 10px;
+    margin: 6px 0 8px;
+}
+
+.login-register p{
+    color: #fff;
 }
 
 .login-register p a{
-    color: #162938;
+    color: #e0f48e;
     text-decoration: none;
     font-weight: 600;
 }
@@ -207,11 +212,9 @@ body{
     transition: 0.5s ease;
 }
 
-
 .icon-close a{
     padding-left: 8px;
     font-size: 16px;
     color: gold;
     text-decoration: none;
-
 }
