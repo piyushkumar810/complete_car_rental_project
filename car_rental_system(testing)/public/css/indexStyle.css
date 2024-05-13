@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-padding-top: 1rem;
+    scroll-padding-top: 16px;
     scroll-behavior: smooth;
     text-decoration: none;
     list-style: none;
@@ -35,7 +35,7 @@ html::-webkit-scrollbar-thumb{
 }
 
 section{
-    padding: 4rem 0 2rem;
+    padding: 64px 0 32px;
 }
 
 img{
@@ -84,14 +84,14 @@ header.shadow #search-icon{
 }
 
 #menu-icon{
-    font-size: 24px;
+    font-size: 19px;
     cursor:pointer;
     color: var(--text-color);
     display: none;
 }
 
 .logo{
-    font-size: 1.2rem;
+    font-size: 30px;
     font-weight: 700;
     color: var(--text-color);
 }
@@ -102,12 +102,12 @@ header.shadow #search-icon{
 
 .navbar{
     display: flex;
-    column-gap: 2rem;
+    column-gap: 32px;
 }
 
 .navbar a{
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: 16px;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -116,6 +116,7 @@ header.shadow #search-icon{
 .navbar .active{
     color: var(--main-color);
     border-bottom: 3px solid var(--main-color);
+    transition: 0.3s;
 }
 
 /* #search-icon{
@@ -156,7 +157,6 @@ header.shadow #search-icon{
     font-weight: 600;
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
-
 }
 
 .login-container .loginBtn:hover{
@@ -201,7 +201,7 @@ header.shadow #search-icon{
 }
 
 .home-text h1{
-    font-size: 2.4rem;
+    font-size: 38px;
 }
 
 .home-text span{
@@ -209,9 +209,9 @@ header.shadow #search-icon{
 }
 
 .home-text p{
-    font-size: 0.938rem;
+    font-size: 15px;
     font-weight: 300;
-    margin: 0.5rem 0 1.2rem;
+    margin: 8px 0 19px;
 }
 
 .btn{
@@ -219,7 +219,7 @@ header.shadow #search-icon{
     background-color: var(--main-color);
     color: var(--bg-color);
     font-weight: 600;
-    border-radius: 0.6rem;
+    border-radius: 9.5px;
 }
 
 .btn:hover{
@@ -244,7 +244,7 @@ header.shadow #search-icon{
 }
 
 .heading p{
-    font-size: o.95rem;
+    font-size: 15px;
     font-weight: 300;
 }
 
@@ -253,15 +253,15 @@ header.shadow #search-icon{
     color: var(--text-color);
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 32px;
+    margin-top: 32px;
 }
 
 .cars-container .box{
-    flex: 1 1 17rem;
+    flex: 1 1 272px;
     position: relative;
     height: 200px;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -366,11 +366,13 @@ header.shadow #search-icon{
     font-size: 18px;
     font-weight: 600;
 }
+
 .state-contaier .box i{
     font-size: 18px;
     font-weight: 600;
     color: red;
 }
+
 .state-contaier .box .btn{
     max-width: 120px;
     color: white;
@@ -378,10 +380,12 @@ header.shadow #search-icon{
     border-radius: 5px;
     margin: 10px 0;
 }
+
 .state-contaier .box .btn:hover{
     color: red;
     background: rgb(250, 250, 250);
 }
+
 .state-contaier .box .locations{
     display: flex;
     align-items: center;
@@ -392,6 +396,7 @@ header.shadow #search-icon{
     font-size: 18px;
     font-weight: 500;
 }
+
 .state-contaier .box .locations:hover{
     color: red;
     text-decoration: underline;
@@ -552,6 +557,7 @@ header.shadow #search-icon{
 
     #menu-icon{
         display:initial;
+        font-size: 32px;
     }
 
     .navbar{
@@ -610,11 +616,57 @@ header.shadow #search-icon{
     .about-text h2{
         font-size: 22px;
     }
+
+    #menu-icon{
+        font-size: 32px;
+    }
 }
 
-@media(max-width:607){
+@media(max-width:607px){
     .footer-container{
         display: grid;
         grid-template-columns: 1fr 1fr;
     }
+
+
+    #menu-icon{
+        font-size: 32px;
+    }
+
+}
+
+@media(max-width:420px)
+{
+    .logo{
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+       
+    .login-container .loginBtn{
+        font-weight: 600;
+        padding: 4px 20px;
+
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        border-bottom-left-radius: none;
+        border-bottom-right-radius: none;
+    }
+
+    #menu-icon{
+        font-size: 25px;
+    }
+    
+    .login-container .adminBtn{
+        font-weight: 600;
+        padding: 4px 20px;
+
+        border-top-left-radius: none;
+        border-top-right-radius: none;
+
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    
 }
