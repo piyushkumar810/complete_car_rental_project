@@ -557,6 +557,7 @@ header.shadow #search-icon{
 
     #menu-icon{
         display:initial;
+        font-size: 32px;
     }
 
     .navbar{
@@ -615,6 +616,10 @@ header.shadow #search-icon{
     .about-text h2{
         font-size: 22px;
     }
+
+    #menu-icon{
+        font-size: 32px;
+    }
 }
 
 @media(max-width:607px){
@@ -623,9 +628,45 @@ header.shadow #search-icon{
         grid-template-columns: 1fr 1fr;
     }
 
+
+    #menu-icon{
+        font-size: 32px;
+    }
+
 }
 
 @media(max-width:420px)
 {
+    .logo{
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+       
+    .login-container .loginBtn{
+        font-weight: 600;
+        padding: 4px 20px;
+
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        border-bottom-left-radius: none;
+        border-bottom-right-radius: none;
+    }
+
+    #menu-icon{
+        font-size: 25px;
+    }
+    
+    .login-container .adminBtn{
+        font-weight: 600;
+        padding: 4px 20px;
+
+        border-top-left-radius: none;
+        border-top-right-radius: none;
+
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
     
 }
