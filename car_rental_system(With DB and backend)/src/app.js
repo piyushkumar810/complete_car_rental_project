@@ -1,8 +1,15 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
 const port = process.env.PORT || 8000;
+require("./db/connection");
+const User = require("./models/models");
+const bcrypt = require("bcryptjs");
 
+
+
+// ******** Paths *************
 
 // Static path for public directory 
 const staticPath = path.join(__dirname, "../public");
@@ -10,10 +17,14 @@ const staticPath = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
 
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(staticPath));
 
+// View Engines 
 app.set("views", viewsPath);
 app.set("view engine", "hbs");
-app.use(express.static(staticPath));
 
 
 // ********************homepage route**********************
@@ -54,28 +65,24 @@ app.get("/collections", (req, res) => {
 
 // ************************login(get) section route**************************
 
-app.get("/login", (req, res) => {
-  res.render("login");
+app.get("/login-and-signup", (req, res) => {
+  res.render("login-and-signup");
 })
 // ************************login(post) section route**************************
 
-app.post("/login", (req, res) => {
-  res.render("login");
+app.post("/login-and-signup", (req, res) => {
+  // res.render("login-and-signup");
+  
+
+
 })
 
-
-
-
-// ************************register(get) section route**************************
-
-app.get("/register", (req, res) => {
-  res.render("register");
-})
 // ************************register(post) section route**************************
 
 app.post("/register", (req, res) => {
   res.render("register");
 })
+
 
 
 app.listen(port, () => {
