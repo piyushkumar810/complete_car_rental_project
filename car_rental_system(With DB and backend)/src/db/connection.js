@@ -7,23 +7,37 @@ const mongoose = require("mongoose");
   } catch (error) {
     console.log(" Failed to connect ", error);
   }
-  // const UsersSchema = new mongoose.Schema({
-  //   name: {
-  //     type: String,
-  //     required: true
-  //   }
-  // })
+  const UsersSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: true
+    },
+    contact: {
+      type: Number,
+      required: true,
+      length: 10
+    },
+    email: {
+      type: email,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    ulternateMOB: {
+      type: Number,
+      length: 10
+    },
+    ulternateEmail: {
+      type: email,
+      unique: true
+    },
+  })
 
-  // const UsersModel = new mongoose.model("UsersModel", UsersSchema);
+  // Applying Hashing  
 
 
-  // const document_1 = new UsersModel({
-  //   name: "Surya"
-  // })
-
-  // await document_1.save().then(() => {
-  //   console.log("Saved");
-  // }).catch((error) => {
-  //   console.log(" Saving Failed due to ", error);
-  // });
+  const UsersModel = new mongoose.model("UsersModel", UsersSchema);
 })();
