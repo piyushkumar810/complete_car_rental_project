@@ -4,6 +4,7 @@
 // }
 
 let menu=document.querySelector('.navbar');
+console.log(menu);
 document.querySelector('#menu-icon').onclick=()=>{
     menu.classList.toggle('active')
 }
