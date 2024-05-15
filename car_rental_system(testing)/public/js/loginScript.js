@@ -18,3 +18,19 @@ loginLink.addEventListener('click', ()=>{
 //     container.classList.remove('active')
 // })
 
+
+// -----------------------login page validation
+
+var email = document.querySelector("#userEmail");
+email.oninput=()=>{
+
+    console.log(email.value);
+}
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     var email = document.getElementById("userEmail").value;
+//     console.log(email);
+// });
+
+var password = document.querySelector("#userPassword").value;
+console.log(password);
