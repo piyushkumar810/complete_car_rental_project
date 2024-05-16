@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register page</title>
   <!-- Link The Css File -->
-  <link rel="stylesheet" href="./css/register.css" />
-
+  <link rel="stylesheet" href="css/userRegistration.css" />
+  <link rel="stylesheet" href="css/commonStyling.css">
   <!-- Using Box Icons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
@@ -23,37 +23,39 @@
       <form action="#">
         <div class="input-box">
           <span class="icon"><i class="bx bxs-user"></i></span>
-          <input type="text" name="FullName" value="" required="required" />
+          <input type="text" name="FullName" id="FullName" value="" required="required" autocomplete="off" />
           <label for="FullName">Full Name</label>
         </div>
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-phone"></i></span>
-          <input type="number" name="Contact" value="" required="required" />
+          <input type="number" name="Contact" id="Contact" value="" required="required" autocomplete="off" />
           <label for="Contact">Contact</label>
         </div>
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-envelope"></i></span>
-          <input type="email" name="Email" value="" required="required" id="Email" />
+          <input type="email" name="Email" id="Email" value="" required="required" id="Email" autocomplete="off" />
           <label for="Email">Email</label>
         </div>
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" name="Create_Password" value="" required="required" />
+          <input type="password" name="Create_Password" id="Create_Password" value="" required="required"
+            autocomplete="off" />
           <label for="Create_Password">Create password</label>
         </div>
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" name="Confirm_Password" value="" required="required" />
+          <input type="password" name="Confirm_Password" id="Confirm_Password" value="" required="required"
+            autocomplete="off" />
           <label for="Confirm_Password">Confirm password</label>
         </div>
 
         <div class="remember-forgot">
-          <label for="Terms_&_Conditions"><input type="checkbox" name="Terms_&_Conditions" value=""
-              required="required" />
+          <label for="Terms_&_Conditions"><input type="checkbox" id="Terms_&_Conditions" name="Terms_&_Conditions"
+              value="" required="required" autocomplete="off" />
             Agree to the terms & conditions
           </label>
         </div>
@@ -68,7 +70,7 @@
     </div>
   </div>
 
-  <script src="./js/loginScript.js"></script>
+  <script src="js/userValidation.js"></script>
 </body>
 
 </html>.
