@@ -1,15 +1,15 @@
 const container = document.querySelector('.container');
-const  loginLink= document.querySelector('.login-link');
+const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
 // const closeIcon=document.querySelector('.icon-close')
 
 
 
-registerLink.addEventListener('click', ()=>{
+registerLink.addEventListener('click', () => {
     container.classList.add('active')
 })
 
-loginLink.addEventListener('click', ()=>{
+loginLink.addEventListener('click', () => {
     container.classList.remove('active')
 })
 
@@ -22,7 +22,7 @@ loginLink.addEventListener('click', ()=>{
 // -----------------------login page validation
 
 var email = document.querySelector("#userEmail");
-email.oninput=()=>{
+email.oninput = () => {
 
     console.log(email.value);
 }

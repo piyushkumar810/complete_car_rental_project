@@ -65,22 +65,29 @@ app.get("/collections", (req, res) => {
 
 // ************************login(get) section route**************************
 
-app.get("/login-and-signup", (req, res) => {
-  res.render("login-and-signup");
+app.get("/userLogin", (req, res) => {
+  res.render("userLogin");
 })
+
+
+// ************************** Registration Post**************8
+
+app.get("/userRegistration", (req, res) => {
+  res.render("userRegistration");
+})
+
+
+
 // ************************login(post) section route**************************
 
-app.post("/login-and-signup", (req, res) => {
-  // res.render("login-and-signup");
-  
-
-
+app.post("/userRegistration", (req, res) => {
+  res.render("userRegistration");
 })
 
 // ************************register(post) section route**************************
 
-app.post("/register", (req, res) => {
-  res.render("register");
+app.post("/userLogin", (req, res) => {
+
 })
 
 

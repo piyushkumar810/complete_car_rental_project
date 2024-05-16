@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login page</title>
+  <!-- Link The Css File -->
+  <link rel="stylesheet" href="./css/userLogin.css">
+
+  <!-- Using Box Icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+  <div class="container">
+    <span class="icon-close">
+      <i class='bx bx-arrow-back bx-flip-vertical' style='color:#fde475'></i>
+      <a href="/home"> Home </a>
+    </span>
+    <div class="form-box login">
+      <h2>Login</h2>
+      <form action="#">
+        <div class="input-box">
+          <span class="icon"><i class='bx bxs-envelope'></i></span>
+          <input type="email" name="Email" value="" required="required" />
+          <label for="Email">Email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+          <input type="password" required name="Password" value="" required="required" />
+          <label for="Password">password</label>
+        </div>
+        <div class="remember-forgot">
+          <label for="RememberMe"><input type="checkbox" name="RememberMe">
+            Remember Me
+          </label>
+
+          <a href="#">Forgot password ?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <div class="login-register">
+          <p> Don't have an account?
+            <a href="/public/register.html" class="register-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="./js/userValidation.js"></script>
+</body>
+
+</html>
