@@ -4,8 +4,11 @@ const app = express();
 const path = require("path");
 const port = process.env.PORT || 8000;
 require("./db/connection");
-const User = require("./models/models");
+const User = require("./models/model");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const auth = require("./middleware/authentication");
+const cookieParser = require("cookie-parser");
 
 
 
@@ -18,6 +21,7 @@ const viewsPath = path.join(__dirname, "../templates/views");
 
 
 // Middleware
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(staticPath));
@@ -56,8 +60,8 @@ app.get("/blog", (req, res) => {
 
 // ************************collection section route**************************
 
-app.get("/collections", (req, res) => {
-  res.render("collections");
+app.get("/contact-us", (req, res) => {
+  res.render("contact_us");
 })
 
 
@@ -70,7 +74,7 @@ app.get("/userLogin", (req, res) => {
 })
 
 
-// ************************** Registration Post**************8
+// ************************** Registration get Route**************
 
 app.get("/userRegistration", (req, res) => {
   res.render("userRegistration");
@@ -80,8 +84,29 @@ app.get("/userRegistration", (req, res) => {
 
 // ************************login(post) section route**************************
 
-app.post("/userRegistration", (req, res) => {
-  res.render("userRegistration");
+app.post("/userRegistration", async (req, res) => {
+
+  try {
+    const EnterPassword = req.body.Create_Password;
+    const confirmPassword = req.body.Confirm_Password;
+    if (EnterPassword === confirmPassword) {
+      const userDocument = new User({
+        name: req.body.FullName.trim(),
+        contact: req.body.Contact.trim(),
+        email: req.body.Email,
+        password: confirmPassword
+      })
+      await userDocument.save().then(() => {
+        res.status(201).send("Form Submitted")
+      }).catch((error) => {
+        res.status(400).send(error);
+        console.log(error);
+      })
+    }
+  } catch (error) {
+    res.status(400).send("Password MisMatch");
+  }
+
 })
 
 // ************************register(post) section route**************************
@@ -91,8 +116,19 @@ app.post("/userLogin", (req, res) => {
 })
 
 
+// ****** Forgot Password ************
+
+app.get("/forgetPassword", (req, res) => {
+  res.render("forgotPassword");
+})
+
+// ****** Forgot Password (POST Method)************
+app.post("/forgetPassword", (req, res) => {
+  // res.render("forgotPassword");
+})
+
+
 
 app.listen(port, () => {
   console.log("Listening at port ", port);
 })
-

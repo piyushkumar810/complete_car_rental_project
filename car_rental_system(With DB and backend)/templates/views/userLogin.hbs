@@ -21,7 +21,7 @@
     </span>
     <div class="form-box login">
       <h2>Login</h2>
-      <form action="#">
+      <form action="/userLogin" method="POST">
         <div class="input-box">
           <span class="icon"><i class='bx bxs-envelope'></i></span>
           <input type="email" name="Email" value="" required="required" />
@@ -37,13 +37,13 @@
             Remember Me
           </label>
 
-          <a href="#">Forgot password ?</a>
+          <a href="/forgetPassword">Forgot password ?</a>
         </div>
 
         <button type="submit" class="btn">Login</button>
         <div class="login-register">
           <p> Don't have an account?
-            <a href="/register" class="register-link">Register</a>
+            <a href="/userRegistration" class="register-link">Register</a>
           </p>
         </div>
       </form>
