@@ -81,8 +81,9 @@ app.get("/userRegistration", (req, res) => {
 })
 
 
+// ************************register(post) section route**************************
 
-// ************************login(post) section route**************************
+
 
 app.post("/userRegistration", async (req, res) => {
 
@@ -96,6 +97,8 @@ app.post("/userRegistration", async (req, res) => {
         email: req.body.Email,
         password: confirmPassword
       })
+      const token = await userDocument.generateAuthToken();
+
       await userDocument.save().then(() => {
         res.status(201).send("Form Submitted")
       }).catch((error) => {
@@ -109,10 +112,33 @@ app.post("/userRegistration", async (req, res) => {
 
 })
 
-// ************************register(post) section route**************************
 
-app.post("/userLogin", (req, res) => {
 
+// ************************login(post) section route**************************
+app.post("/userLogin", async (req, res) => {
+  try {
+    const email = req.body.Email;
+    const password = req.body.Password;
+    const isUser = await User.findOne({ email });
+    // console.log(isUser);
+    const isMatch = await bcrypt.compare(password, isUser.password);
+    // console.log(isMatch);
+
+    const token = await isUser.generateAuthToken();
+
+    res.cookie("jwt", token, {
+      expires: new Date(Date.now() + (60 * 60)),
+      httpOnly: true,
+      secure: true
+    })
+
+    if (isMatch) {
+
+    }
+
+  } catch (error) {
+
+  }
 })
 
 
