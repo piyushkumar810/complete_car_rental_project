@@ -8,6 +8,10 @@
     font-size: 'poppins', 'sans-serif';
 }
 
+:root{
+    --text-color:rgb(243, 238, 238);
+}
+
 .contact{
     min-height: 100vh;
     padding: 50px 100px;
@@ -15,7 +19,55 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url(../assets/contact_us.jpg);
+    background: url(../assets/green_BgCar.jpg);
     background-size: cover;
     flex-direction: wrap;
+}
+
+.contact .content{
+    max-width: 800px;
+    text-align: center;
+    /* color: #fff; */
+}
+
+.contact .content h2{
+    color: var(--text-color);
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.contact .content p{
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+/* ----------------------styling the container  */
+.contact .container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    /* justify-content: space-between; */
+}
+
+.container .contactInfo{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container .contactInfo .box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+
+.container .contactInfo .box .icon{
+    min-width: 60px;
+    height: 60px;
+    background: rgb(28, 28, 28);
+    
 }
