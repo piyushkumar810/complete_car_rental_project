@@ -2,14 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8000;
 require("./db/connection");
 const User = require("./models/model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
-const cookieParser = require("cookie-parser");
-
 
 
 // ******** Paths *************
@@ -39,29 +38,44 @@ app.get("/home", (req, res) => {
 
 // ********************services route************************
 
-app.get("/services", (req, res) => {
+app.get("/services", auth, (req, res) => {
   res.render("services");
 })
 
 
 // *******************about section route**********************
 
-app.get("/about", (req, res) => {
+app.get("/about", auth, (req, res) => {
   res.render("about");
 })
 
 
 // ************************blog section route**************************
 
-app.get("/blog", (req, res) => {
+app.get("/blog", auth, (req, res) => {
   res.render("blog");
 })
 
 
 // ************************collection section route**************************
 
-app.get("/contact-us", (req, res) => {
+app.get("/contact-us", auth, (req, res) => {
   res.render("contact_us");
+})
+
+
+
+// ************************Admin section route**************************
+
+app.get("/admin", auth, (req, res) => {
+  res.render("admin");
+})
+
+
+// ************************UserPage section route**************************
+
+app.get("/userPage", auth, (req, res) => {
+  res.render("userPage");
 })
 
 
@@ -69,7 +83,7 @@ app.get("/contact-us", (req, res) => {
 
 // ************************login(get) section route**************************
 
-app.get("/userLogin", (req, res) => {
+app.get("/userLogin", auth, (req, res) => {
   res.render("userLogin");
 })
 
@@ -125,26 +139,28 @@ app.post("/userLogin", async (req, res) => {
     // console.log(isMatch);
 
     const token = await isUser.generateAuthToken();
-
-    res.cookie("jwt", token, {
-      expires: new Date(Date.now() + (60 * 60)),
-      httpOnly: true,
-      secure: true
-    })
-
     if (isMatch) {
+      res.cookie("jwt", token, {
+        expires: new Date(Date.now() + (60 * 60)),
+        httpOnly: true,
+        secure: true
+      })
 
+      res.status(201).send("User's Profile Page");
+    }
+    else {
+      res.status(401).render("userLogin");
     }
 
   } catch (error) {
-
+    console.log(error);
   }
 })
 
 
 // ****** Forgot Password ************
 
-app.get("/forgetPassword", (req, res) => {
+app.get("/forgetPassword", auth, (req, res) => {
   res.render("forgotPassword");
 })
 
