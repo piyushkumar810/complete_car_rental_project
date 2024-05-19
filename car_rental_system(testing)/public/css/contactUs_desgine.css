@@ -12,6 +12,7 @@
     --text-color:rgb(243, 238, 238);
 }
 
+/* ------------------------main div */
 .contact{
     min-height: 100vh;
     padding: 50px 100px;
@@ -24,6 +25,7 @@
     flex-direction: wrap;
 }
 
+/*---------------------- main div child 1 */
 .contact .content{
     max-width: 800px;
     text-align: center;
@@ -66,9 +68,11 @@
 }
 
 .container .contactInfo .box .icon{
-    min-width: 60px;
-    height: 60px;
-    background: rgb(28, 28, 28);
+    min-width: 50px;
+    height: 50px;
+    margin-right: 6px;
+    margin-top: -10px;
+    background: rgba(145, 143, 143, 0.614);
     color: #698872 !important;
     /* z-index: 23; */
     display: flex;
@@ -82,7 +86,7 @@
     color: aliceblue;
     display: flex;
     margin: left;
-    font-size: 16px;
+    font-size: 14px;
     flex-direction: column;
 
 }
@@ -100,7 +104,7 @@
     justify-content: center;
     flex-direction: column;
     padding: 40px;
-    background: #fff;
+    background: #f5ebeb;
     border-radius: 4px;
 }
 
@@ -180,7 +184,6 @@
     .container .contactInfo,
     .container .contactForm{
         width: 100%;
-
     }
 
 
