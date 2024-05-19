@@ -64,7 +64,6 @@ app.get("/contact-us", auth, (req, res) => {
 })
 
 
-
 // ************************Admin section route**************************
 
 app.get("/admin", auth, (req, res) => {

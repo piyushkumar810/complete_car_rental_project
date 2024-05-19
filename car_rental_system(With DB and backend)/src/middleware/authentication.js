@@ -12,11 +12,10 @@ const auth = async (req, res, next) => {
     // console.log(myUser);
     req.token = token;
     req.myUser = myUser;
+    // res.status(201).render("userPage");
     next();
   } catch (error) {
     res.status(401).render("userLogin");
   }
-
 }
-
 module.exports = auth;
