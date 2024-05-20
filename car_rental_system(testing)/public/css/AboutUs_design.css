@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'poppins', 'sans-serif';
 }
 
 :root{
@@ -12,7 +13,6 @@
 
 body{
     background: #12172b;
-    font-family: 'poppins', 'sans-serif';
 }
 
 .container{
@@ -115,4 +115,8 @@ body{
     .profile p{
         margin: 20px 10px 80px 10px;
     }
+}
+
+@media  {
+    
 }
