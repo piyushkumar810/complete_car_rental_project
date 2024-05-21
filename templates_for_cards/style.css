@@ -29,11 +29,12 @@
 }
 
 .main ul li {
-  height: 40%;
-  width: 18%;
+  min-height: 325px;
+  width: 229px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-around;
   padding: 9px;
   gap: 10px;
   background-color: aqua;
@@ -68,4 +69,15 @@
   border: 1px solid black;
   border-radius: 6px;
   padding: 7px;
+}
+
+button {
+  min-height: 50px;
+  min-width: 130px;
+  border-radius: 5px;
+  background-color: rgb(192, 83, 105);
+  margin: auto;
+  position: relative;
+  top: 10px;
+  left: 46vw;
 }

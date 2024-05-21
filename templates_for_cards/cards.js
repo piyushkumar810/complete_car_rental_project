@@ -1,137 +1,38 @@
-let parentElement = document.querySelector(".main-ul");
+const ul = document.querySelector(".main-ul");
+let click = document.querySelector("button");
 
-// cards.js
+var createitems = () => {
 
-// Sample data for list items
-const data = [
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  {
-    imgSrc: 'Profile_1.jpg',
-    altText: 'Profile_1',
-    italicText: 'Lorem ipsum dolor sit amet',
-    paragraphText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!',
-    boldText: '2 Seater'
-  },
-  // Add more objects as needed
-];
-
-// Function to create a new list item
-function createListItem(item) {
-  // Create <li> element
-  const li = document.createElement('li');
-
-  // Create and append <img> element
-  const img = document.createElement('img');
-  img.src = item.imgSrc;
-  img.alt = item.altText;
-  li.appendChild(img);
-
-  // Create and append <div> element with class "details"
-  const detailsDiv = document.createElement('div');
-  detailsDiv.classList.add('details');
-  li.appendChild(detailsDiv);
-
-  // Create and append <i> element
-  const italic = document.createElement('i');
-  italic.textContent = item.italicText;
-  detailsDiv.appendChild(italic);
-
-  // Create and append <p> element
-  const paragraph = document.createElement('p');
-  paragraph.textContent = item.paragraphText;
-  detailsDiv.appendChild(paragraph);
-
-  // Create and append <b> element
-  const bold = document.createElement('b');
-  bold.textContent = item.boldText;
-  detailsDiv.appendChild(bold);
-
-  // Create and append <div> element with class "booking"
-  const bookingDiv = document.createElement('div');
-  bookingDiv.classList.add('booking');
-  detailsDiv.appendChild(bookingDiv);
-
-  // Create and append "Book Now" link
-  const bookNowLink = document.createElement('a');
-  bookNowLink.href = '#';
-  bookNowLink.textContent = 'Book Now';
-  bookingDiv.appendChild(bookNowLink);
-
-  // Create and append "More Details" link
-  const moreDetailsLink = document.createElement('a');
-  moreDetailsLink.href = '#';
-  moreDetailsLink.textContent = 'More Details';
-  bookingDiv.appendChild(moreDetailsLink);
-
-  return li;
+  let li = document.createElement("li");
+  ul.append(li);
+  let img = document.createElement("img");
+  img.src = "Profile_1.jpg";
+  li.append(img);
+  let detailsDiv = document.createElement("div");
+  detailsDiv.classList.add("details");
+  li.append(detailsDiv);
+  let carTitle = document.createElement("i");
+  carTitle.innerText = "Lorem ipsum dolor sit amet";
+  detailsDiv.append(carTitle);
+  let carDetails = document.createElement("p");
+  carDetails.innerText = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique ratione cum odit velit labore!";
+  detailsDiv.append(carDetails);
+  let seatDetails = document.createElement("b");
+  seatDetails.innerText = "2 Seater";
+  detailsDiv.append(seatDetails);
+  let bookingDiv = document.createElement("div");
+  bookingDiv.classList.add("booking");
+  detailsDiv.append(bookingDiv);
+  let bookNow = document.createElement("a");
+  bookNow.innerText = "Book Now";
+  let moreDetails = document.createElement("a");
+  moreDetails.innerText = "more details..";
+  bookingDiv.append(bookNow);
+  bookingDiv.append(moreDetails);
 }
 
-function renderList() {
-  // Get the <ul> element with class "main-ul"
-  const ul = document.querySelector('.main-ul');
-
-  // Loop through the data array and create list items
-  data.forEach(item => {
-    const listItem = createListItem(item);
-    ul.appendChild(listItem);
-  });
+click.onclick = () => {
+  for (i = 0; i < 10; i++) {
+    createitems();
+  }
 }
-
-
-
-document.addEventListener('DOMContentLoaded', renderList);
