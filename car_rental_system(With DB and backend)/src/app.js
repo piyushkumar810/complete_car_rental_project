@@ -5,7 +5,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8000;
 require("./db/connection");
-const User = require("./models/model");
+const User = require("./models/userModel");
+const Cars = require("./models/carModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
@@ -167,6 +168,32 @@ app.get("/forgetPassword", auth, (req, res) => {
 app.post("/forgetPassword", (req, res) => {
   // res.render("forgotPassword");
 })
+
+
+
+
+
+// ****************   Car Related Routes ***************
+
+
+
+
+// ******** Collections  *********
+app.get("/collections", (req, res) => {
+  res.send("collections");
+})
+
+
+
+// **************  Registering New Car ************
+
+app.get("/makeEntry", (req, res) => {
+  res.send("Car Entry Page")
+});
+app.post("/makeEntry", (req, res) => {
+
+});
+
 
 
 

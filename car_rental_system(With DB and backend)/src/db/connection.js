@@ -8,5 +8,4 @@ const mongoose = require("mongoose");
     console.log(" Failed to connect ", error);
   }
 
-  // Applying Hashing  
 })();

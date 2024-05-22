@@ -2,7 +2,7 @@
   "name": "car_rental_system",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "entry":"index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js"
@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-hbs": "^2.5.0",
+    "faker": "^6.6.6",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.1",
