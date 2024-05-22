@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 (async function () {
   const registrationSchema = new mongoose.Schema({
     name: {
@@ -31,7 +32,6 @@ const jwt = require("jsonwebtoken");
       }
     }]
   });
-
 
   // ************* generating Token *********************
 
