@@ -58,6 +58,4 @@ const mongoose = require("mongoose");
 
   // Export the model
   module.exports = Car;
-
-
 })();

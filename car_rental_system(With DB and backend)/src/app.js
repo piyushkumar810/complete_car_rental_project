@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
+const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8000;
 require("./db/connection");
@@ -119,6 +120,12 @@ app.post("/userRegistration", async (req, res) => {
         res.status(400).send(error);
         console.log(error);
       })
+
+      verifyEmail();
+      console.log("Mail Sent Successfully");
+
+
+      // res.render()
     }
   } catch (error) {
     res.status(400).send("Password MisMatch");
@@ -139,17 +146,22 @@ app.post("/userLogin", async (req, res) => {
     // console.log(isMatch);
 
     const token = await isUser.generateAuthToken();
-    if (isMatch) {
-      res.cookie("jwt", token, {
-        expires: new Date(Date.now() + (60 * 60)),
-        httpOnly: true,
-        secure: true
-      })
+    if (isUser) {
+      if (isMatch) {
+        res.cookie("jwt", token, {
+          expires: new Date(Date.now() + (60 * 60)),
+          httpOnly: true,
+          secure: true
+        })
 
-      res.status(201).send("User's Profile Page");
+        res.status(201).send("User's Profile Page");
+      }
+      else {
+        res.status(401).render("userLogin");
+      }
     }
     else {
-      res.status(401).render("userLogin");
+      res.send("User Not Found");
     }
 
   } catch (error) {
