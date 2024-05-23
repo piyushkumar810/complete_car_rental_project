@@ -23,7 +23,8 @@
       <form action="/userRegistration" method="POST">
         <div class="input-box">
           <span class="icon"><i class="bx bxs-user"></i></span>
-          <input type="text" name="FullName" id="FullName" value="" required="required" autocomplete="off" />
+          <input type="text" name="FullName" id="FullName" value="" required="required" autocomplete="off"
+            maxlength="60" />
           <label for="FullName">Full Name</label>
         </div>
 
@@ -41,14 +42,14 @@
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" name="Create_Password" id="Create_Password" value="" required="required"
+          <input type="password" class="pass" name="Create_Password" id="Create_Password" value="" required="required"
             autocomplete="off" />
           <label for="Create_Password">Create password</label>
         </div>
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" name="Confirm_Password" id="Confirm_Password" value="" required="required"
+          <input type="password" class="pass" name="Confirm_Password" id="Confirm_Password" value="" required="required"
             autocomplete="off" />
           <label for="Confirm_Password">Confirm password</label>
         </div>
