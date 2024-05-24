@@ -58,6 +58,4 @@ const verifyEmail = () => {
 
   }
 }
-module.exports = {
-  auth, verifyEmail
-};
+module.exports = [auth, verifyEmail];

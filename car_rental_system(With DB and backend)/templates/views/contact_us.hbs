@@ -4,13 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>about us</title>
+  <title>Contact Us page</title>
+
+  <!-- Link The Css File -->
+  <link rel="stylesheet" href="css/contactUs.css">
+
+  <!-- Box Icons - taken from the boxicon.com/usage-->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-  <h1>
-    this is Collections section
-  </h1>
+  <section class="contact">
+    <div class="content">
+      <h2> Contact Us </h2>
+      <p>"Have a question or need assistance? Our team is just a message away.
+        Contact us and we'll get back to you as soon as possiblle.</p>
+    </div>
+
+    <div class="container">
+      <!-- this section will contain our information -->
+      <div class="contactInfo">
+        <div class="box">
+          <div class="icon"><i class='bx bxs-droplet bx-flip-vertical' style='color:#f7e862'></i></div>
+          <div class="text">
+            <h3>Address</h3>
+            <p>near Gandhi maidan, janki aprtement gali no: 5 </p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="icon"><i class='bx bxs-envelope' style='color:#f3f062'></i></div>
+          <div class="text">
+            <h3>Email</h3>
+            <p>sk-pk-sk810@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="icon"><i class='bx bxs-phone' style="color: #f3f062;"></i></div>
+          <div class="text">
+            <h3>Phone</h3>
+            <p>810-235-6837 </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- this section will hold user query -->
+      <div class="contactForm">
+        <h2>Send Message <sup><i class='bx bx-message-rounded-dots bx-tada'></i></sup></h2>
+        <div class="inputBox">
+          <input type="text" required>
+          <span>Full Name</span>
+        </div>
+
+        <div class="inputBox">
+          <input type="text" required>
+          <span>Email</span>
+        </div>
+
+        <div class="inputBox">
+          <textarea required></textarea>
+          <span>Type Your Message...</span>
+        </div>
+
+        <div class="inputBox">
+          <input type="submit" value="Send">
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 
 </html>
