@@ -527,9 +527,9 @@ header.shadow #search-icon{
 
 /*-------------- making responsive---------------- */
 
-@media only screen and (min-width: 1260px) and (max-width: 2250px){
+@media only screen and (min-width: 1300px) and (max-width: 2020px){
 
-    /* ------------------navbar section */
+    
     .img{
         width: 100%;
     }
@@ -551,17 +551,13 @@ header.shadow #search-icon{
         font-size: 20px;
     }
 
-    /* ----------------------home section */
+    
     .home-text{
         padding-left: 50px;
     }
 
     .home-text h1{
         font-size: 40px;
-    }
-
-    .home-text h1 span{
-        margin-left: 60px;
     }
 
     .home-text p{
@@ -572,7 +568,6 @@ header.shadow #search-icon{
         font-size: 20px;
     }
 
-    /* ------------------------car section */
 
     .heading span{
         font-size: 24px;
@@ -603,7 +598,6 @@ header.shadow #search-icon{
         padding: 5px 10px 5px 10px;
     }
     
-    /* ---------------------------About us */
     
     .about-img{
         flex: 26 26 436px;
@@ -632,7 +626,6 @@ header.shadow #search-icon{
         font-size: 20px;
     }
 
-    /* -------------------------our services */
     
     .state-contaier .box{
         height: 400px;
@@ -659,7 +652,6 @@ header.shadow #search-icon{
         font-weight: 500;
     }
     
-   /* -------------------------blog container */
 
     .blog-container .box img{
         height: 45%;
@@ -693,7 +685,6 @@ header.shadow #search-icon{
         font-weight: 600;
     }
 
-    /* -----------------------footer */
     
     .footer-box .logo{
         font-size: 50px;
@@ -713,13 +704,12 @@ header.shadow #search-icon{
         font-size: 20px;
     }
     
-    /* ------------------------copyright------------------- */
     .copyright p{
         font-size: 20px;
     }
-}
+}  
 
-
+/* -----------------------------------for 14 inch */
 @media(max-width:1080px){
     .container{
         margin-left: 16px;
