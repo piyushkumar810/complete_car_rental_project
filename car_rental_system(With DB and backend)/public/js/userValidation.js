@@ -166,10 +166,8 @@ submit_btn.onclick = (e) => {
       break;
     }
   }
-
   if (isValid) {
     form.submit();
-    alert("Your form has been successfully submitted...!");
   }
 }
 

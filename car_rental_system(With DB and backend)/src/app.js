@@ -11,6 +11,7 @@ const Cars = require("./models/carModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
+const emailVerification = require("./middleware/emailVerification");
 
 
 // ******** Paths *************
@@ -121,8 +122,8 @@ app.post("/userRegistration", async (req, res) => {
         console.log(error);
       })
 
-      // verifyEmail();
-      // console.log("Mail Sent Successfully");
+      verifyEmail("suryask7549@gmail.com", req.body.Email, process.env.Password);
+      console.log("Mail Sent Successfully");
 
 
       // res.render()
