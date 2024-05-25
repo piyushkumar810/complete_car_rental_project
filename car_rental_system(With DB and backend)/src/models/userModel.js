@@ -3,7 +3,19 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const { date } = require("faker/lib/locales/az");
 (async function () {
+
+
+  // ***************** Time Conversion **********
+
+  function convertISTtoUTC(date) {
+    const istOffset = 5.5 * 60; // IST is UTC + 5:30
+    const utcDate = new Date(date.getTime() - (istOffset * 60 * 1000));
+    return utcDate;
+  }
+
+
   const registrationSchema = new mongoose.Schema({
     name: {
       type: String,
@@ -30,7 +42,16 @@ const nodemailer = require("nodemailer");
         type: String,
         required: true
       }
-    }]
+    }],
+    time: {
+      type: Date,
+      default: function () {
+        // Get current date and time in IST
+        const currentDateIST = new Date();
+        // Convert to UTC
+        return convertISTtoUTC(currentDateIST);
+      }
+    }
   });
 
   // ************* generating Token *********************

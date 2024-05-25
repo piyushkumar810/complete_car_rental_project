@@ -121,8 +121,8 @@ app.post("/userRegistration", async (req, res) => {
         console.log(error);
       })
 
-      verifyEmail();
-      console.log("Mail Sent Successfully");
+      // verifyEmail();
+      // console.log("Mail Sent Successfully");
 
 
       // res.render()
