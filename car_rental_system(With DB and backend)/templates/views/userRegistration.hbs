@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register page</title>
   <!-- Link The Css File -->
-  <link rel="stylesheet" href="css/userRegistration.css" />
-  <link rel="stylesheet" href="css/commonStyling.css">
+  <link rel="stylesheet" href="./css/userRegistration.css" />
+  <link rel="stylesheet" href="./css/commonStyling.css">
   <!-- Using Box Icons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
@@ -20,47 +20,64 @@
     </span>
     <div class="form-box register ">
       <h2>Registration</h2>
-      <form action="/userRegistration" method="POST">
+      <form action="/userRegistration" method="post">
+
+        <!-- *****************  For Name *********** -->
+
         <div class="input-box">
           <span class="icon"><i class="bx bxs-user"></i></span>
           <input type="text" name="FullName" id="FullName" value="" required="required" autocomplete="off"
-            maxlength="60" />
-          <label for="FullName">Full Name</label>
+            placeholder="Enter Name" class="" />
+          <small class="name_small"></small>
         </div>
+
+
+        <!-- *****************  For Contact *********** -->
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-phone"></i></span>
-          <input type="number" name="Contact" id="Contact" value="" required="required" autocomplete="off" />
-          <label for="Contact">Contact</label>
+          <input type="number" name="Contact" id="Contact-Number" value="" required="required" autocomplete="off"
+            placeholder="Enter Phone Number" />
+          <small class="contact_small" id="Mobile-Number-Small"></small>
         </div>
+
+
+        <!-- *****************  Email*********** -->
 
         <div class="input-box">
           <span class="icon"><i class="bx bxs-envelope"></i></span>
-          <input type="email" name="Email" id="Email" value="" required="required" id="Email" autocomplete="off" />
-          <label for="Email">Email</label>
+          <input type="email" name="Email" value="" required="required" id="Email-Id" autocomplete="off"
+            placeholder="Enter Email" class="email_small" />
+          <small class="email_small" id="Email-Small"></small>
         </div>
+
+
+        <!-- *****************  Create Password *********** -->
 
         <div class="input-box">
-          <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" class="pass" name="Create_Password" id="Create_Password" value="" required="required"
-            autocomplete="off" />
-          <label for="Create_Password">Create password</label>
+          <span class="icon" style="z-index: 99;"><i class='bx bxs-hide Hide-Password' class="Hide-Password"></i></span>
+          <input type="password" name="Create_Password" id="CP" value="" required="required" autocomplete="off"
+            placeholder="Create Password" class="" />
+          <small class="create-password-small error-message"></small>
         </div>
+
+        <!-- *****************  Confirm Password *********** -->
+
 
         <div class="input-box">
-          <span class="icon"><i class="bx bxs-lock-alt"></i></span>
-          <input type="password" class="pass" name="Confirm_Password" id="Confirm_Password" value="" required="required"
-            autocomplete="off" />
-          <label for="Confirm_Password">Confirm password</label>
+          <input type="password" name="Confirm_Password" id="Confirm-Password" value="" required="required"
+            autocomplete="off" placeholder="Confirm Password" />
+          <small id="confirm-Password-Small" class="error-message"></small>
         </div>
 
-        <div class="remember-forgot">
-          <label for="Terms_&_Conditions"><input type="checkbox" id="Terms_&_Conditions" name="Terms_&_Conditions"
-              value="" required="required" autocomplete="off" />
-            Agree to the terms & conditions
-          </label>
-        </div>
-        <button type="submit" class="btn">Register</button>
+
+        <!-- *****************  Submit  *********** -->
+
+        <button type="submit" class="btn" id="RegistrationSubmit">Register</button>
+
+
+        <!-- *****************  Already Signed Up  *********** -->
+
         <div class="login-register">
           <p>
             Already have an account?
@@ -71,7 +88,7 @@
     </div>
   </div>
 
-  <script src="js/userValidation.js"></script>
+  <script src="./js/userValidation.js"></script>
 </body>
 
 </html>.

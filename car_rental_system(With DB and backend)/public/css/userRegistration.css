@@ -28,7 +28,7 @@ body {
   position: relative;
   width: 360px;
   height: 550px;
-  background: #9b9a9a6e;
+  background: #e3dcdc6e;
   border: 2px solid rgb(3, 3, 3);
   border-radius: 20px;
   backdrop-filter: blur(10px);
@@ -80,10 +80,6 @@ body {
   transition: 0.5s;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label {
-  top: -5px;
-}
 
 .input-box input {
   width: 100%;
@@ -104,29 +100,6 @@ body {
   font-size: 18px;
   color: rgb(4, 4, 4);
   line-height: 57px;
-}
-
-.remember-forgot {
-  font-size: 14px;
-  color: var(--text-color);
-  font-weight: 500;
-  margin: 8px 0 14px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.remember-forgot label input {
-  accent-color: #575725;
-  margin-right: 3px;
-}
-
-.remember-forgot a {
-  color: #e0f48e;
-  text-decoration: none;
-}
-
-.remember-forgot a:hover {
-  color: yellow;
 }
 
 .btn {
@@ -195,4 +168,35 @@ body {
   font-size: 16px;
   color: gold;
   text-decoration: none;
+}
+
+
+
+
+/* ***************   Small Tag Styling **************** */
+
+
+small {
+  font-size: 11px;
+  color: #f50d0d !important;
+  position: relative;
+  display: block;
+  top: 4px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+input::placeholder {
+  color: rgba(250, 235, 215, 0.471);
+}
+
+.Error-Input {
+  border-bottom: 2px solid rgb(255, 0, 0) !important;
+  position: relative;
+  top: 1.2px;
+}
+
+.Hide-Password {
+  z-index: 999;
+  cursor: pointer;
 }
