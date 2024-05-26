@@ -314,6 +314,21 @@ app.post("/userRegistration", async (req, res) => {
   }
 });
 
+
+// ************ (get)Mail Verification ********
+
+
+app.get("/mailVerification", (req, res) => {
+  res.render("mailVerification");
+})
+
+// ****************  (POST) Mail verification ********
+
+// app.post('/mailVerification'(req,res)=>{
+
+// })
+
+
 app.post("/userLogin", async (req, res) => {
   try {
     const { Email, Password } = req.body;
