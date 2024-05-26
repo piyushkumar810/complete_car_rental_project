@@ -318,9 +318,9 @@ app.post("/userRegistration", async (req, res) => {
 // ************ (get)Mail Verification ********
 
 
-app.get("/mailVerification", (req, res) => {
-  res.render("mailVerification");
-})
+// app.get("/mailVerification", (req, res) => {
+//   res.render("mailVerification");
+// })
 
 // ****************  (POST) Mail verification ********
 
