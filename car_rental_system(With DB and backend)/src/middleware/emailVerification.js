@@ -37,5 +37,4 @@ const verifyEmail = (sender_mail, reciver_mail, sender_pass) => {
   }
 }
 
-
 module.exports = verifyEmail;

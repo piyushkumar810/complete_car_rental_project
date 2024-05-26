@@ -113,23 +113,21 @@ app.post("/userRegistration", async (req, res) => {
         email: req.body.Email,
         password: confirmPassword
       })
+
+      // ************* Generating Token *************
       const token = await userDocument.generateAuthToken();
 
-      await userDocument.save().then(() => {
-        res.status(201).send("Form Submitted")
-      }).catch((error) => {
-        res.status(400).send(error);
-        console.log(error);
-      })
 
-      verifyEmail("suryask7549@gmail.com", req.body.Email, process.env.Password);
+      // *********** Sending Email *****************
+      userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password);
       console.log("Mail Sent Successfully");
 
 
-      // res.render()
+      await userDocument.save();
+      console.log("User Registerd");
     }
   } catch (error) {
-    res.status(400).send("Password MisMatch");
+    res.status(400).send(error);
   }
 
 })
