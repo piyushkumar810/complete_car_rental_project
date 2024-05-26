@@ -119,7 +119,7 @@ app.post("/userRegistration", async (req, res) => {
 
 
       // *********** Sending Email *****************
-      userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password);
+      await userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password);
       console.log("Mail Sent Successfully");
 
 
