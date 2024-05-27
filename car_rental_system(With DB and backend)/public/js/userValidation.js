@@ -170,13 +170,3 @@ submit_btn.onclick = (e) => {
     form.submit();
   }
 }
-
-
-
-
-
-
-
-
-
-

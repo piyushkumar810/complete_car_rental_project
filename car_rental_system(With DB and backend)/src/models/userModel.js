@@ -26,6 +26,7 @@ const { date } = require("faker/lib/locales/az");
     contact: {
       type: Number,
       length: 10,
+      trim: true,
       required: true
     },
     email: {
@@ -35,7 +36,8 @@ const { date } = require("faker/lib/locales/az");
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     tokens: [{
       token: {

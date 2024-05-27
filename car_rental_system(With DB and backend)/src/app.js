@@ -289,8 +289,8 @@ app.post("/userRegistration", async (req, res) => {
     }
 
     const userDocument = new User({
-      name: FullName.trim(),
-      contact: Contact.trim(),
+      name: FullName,
+      contact: Contact,
       email: Email,
       password: Confirm_Password,
     });
