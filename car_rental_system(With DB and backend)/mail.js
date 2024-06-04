@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
 const otp = Math.floor(Math.random() * 1000000);
 
+
+
 const verifyEmail = () => {
   try {
     const mailSender = nodemailer.createTransport({
@@ -15,7 +17,7 @@ const verifyEmail = () => {
 
     const receiver = {
       from: "suryask7549@gmail.com",
-      to: "piyushkumar810235@gmail.com",
+      to: "sauryask07@gmail.com",
       subject: "Testing",
       text: `${otp} Please verify`
     }
@@ -29,11 +31,16 @@ const verifyEmail = () => {
       else {
         console.log("success", emailResponse);
       }
-      response.end();
+      emailResponse.end();
     })
   } catch (error) {
     console.log(error);
   }
 }
 
-verifyEmail();
+module.exports = verifyEmail;
+
+// verifyEmail();
+
+
+

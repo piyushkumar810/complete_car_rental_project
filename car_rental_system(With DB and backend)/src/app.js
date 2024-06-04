@@ -4,15 +4,15 @@ const app = express();
 const path = require("path");
 const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 require("./db/connection");
 const User = require("./models/UserModel");
-// const verifiedUser = require("./models/verifiedUserModel");
 const Cars = require("./models/carModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
-const emailVerification = require("./middleware/emailVerification");
+const verifyEmail = require("./middleware/emailVerification");
+
 
 // ******** Paths *************
 
@@ -81,6 +81,8 @@ app.get("/userPage", auth, (req, res) => {
 })
 
 
+
+
 // ************************login(get) section route**************************
 
 app.get("/userLogin", auth, (req, res) => {
@@ -101,38 +103,37 @@ app.get("/userRegistration", (req, res) => {
 
 app.post("/userRegistration", async (req, res) => {
 
-  // ********* Generating OTP *******
-
   const generateOTP = () => {
     return Math.floor(Math.random() * 100000);
   };
 
-
   const OTP = generateOTP();
   try {
+
     const EnterPassword = req.body.Create_Password;
     const confirmPassword = req.body.Confirm_Password;
+    const receiver = req.body.Email;
     if (EnterPassword === confirmPassword) {
       const userDocument = new User({
         name: req.body.FullName,
         contact: req.body.Contact,
-        email: req.body.Email,
+        email: receiver,
         password: confirmPassword,
         otp: OTP
       })
 
+
+
       // ************* Generating Token *************
       const token = await userDocument.generateAuthToken();
 
+
       // *********** Sending Email *****************
-      const verify = await userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password, OTP);
-      // console.log(verify, "Mail Sent Successfully");
-      await userDocument.save().then(() => {
-        console.log("Registered SuccessFully");
-        res.render("userPage");
-      }).catch((error) => {
-        console.log("Registration Failed Due to ", error);
-      });
+      verifyEmail("suryask7549@gmail.com", receiver, process.env.Password, OTP);
+      console.log("Mail Sent Successfully");
+      res.render("mailVerification");
+      await userDocument.save();
+      console.log("User Registerd");
     }
   } catch (error) {
     res.status(400).send(error);
@@ -140,8 +141,39 @@ app.post("/userRegistration", async (req, res) => {
 
 })
 
+// *****************  OTP Verification *************
 
+app.get("/mailverification", (req, res) => {
+  res.render("mailVerification");
+})
 
+//
+
+app.post("/mailverification", async (req, res) => {
+  try {
+    const verifyEmail = req.body.verifyingEmail;
+    const verifyOTP = req.body.otp;
+
+    // Checking if user exists
+    // console.log("user");
+    const isUser = await User.findOne({ email: verifyEmail });
+    console.log(isUser);
+    if (isUser) {
+
+      if (verifyOTP === isUser.otp) {
+        await User.updateOne({ email: verifyEmail }, {
+          $set: {
+            isVerified: true
+          }
+        })
+        res.send("verification Completed Successfully");
+      }
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+})
 // ************************login(post) section route**************************
 app.post("/userLogin", async (req, res) => {
   try {
@@ -154,13 +186,17 @@ app.post("/userLogin", async (req, res) => {
     const token = await isUser.generateAuthToken();
     if (isUser) {
       if (isMatch) {
-        res.cookie("jwt", token, {
-          expires: new Date(Date.now() + (60 * 60)),
-          httpOnly: true,
-          secure: true
-        })
-
-        res.status(201).send("User's Profile Page");
+        if (isUser.isVerified === true) {
+          res.cookie("jwt", token, {
+            expires: new Date(Date.now() + (60 * 60)),
+            httpOnly: true,
+            secure: true
+          })
+          res.status(201).send("User's Profile Page");
+        }
+        else {
+          res.send("Email Not verified yet , verify email first");
+        }
       }
       else {
         res.status(401).render("userLogin");
@@ -174,32 +210,6 @@ app.post("/userLogin", async (req, res) => {
     console.log(error);
   }
 })
-
-
-// **************  Validating OTP **************
-app.get("/mailverification", (req, res) => {
-  res.render("mailVerification");
-})
-
-//
-
-app.post("/mailverification", async (req, res) => {
-  try {
-    const verifyEmail = req.body.verifyingEmail;
-    const verifyOTP = req.body.otp;
-
-    // Checking if user exists
-    const isUser = await User.findOne({ email: verifyEmail });
-    if (isUser) {
-
-    }
-
-  } catch (error) {
-
-  }
-})
-
-
 
 
 // ****** Forgot Password ************
@@ -224,7 +234,6 @@ app.post("/forgetPassword", (req, res) => {
 
 // ******** Collections  *********
 app.get("/collections", (req, res) => {
-  console.log(h);
   res.send("collections");
 })
 
@@ -239,12 +248,6 @@ app.post("/makeEntry", (req, res) => {
 
 });
 
-
-// *****************  Procced for Email ********
-
-app.get("/proccedForOTP", (req, res) => {
-  res.render("proccedForOTP");
-})
 
 
 
