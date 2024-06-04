@@ -1,5 +1,5 @@
 require("dotenv").config();
-const validator = require("validator");
+const { capitalize, lowerCase, floor, uniq, uniqueId } = require("lodash");
 const mongoose = require("mongoose");
 
 
@@ -12,7 +12,7 @@ function convertISTtoUTC(date) {
 }
 
 
-const verifiedSchema = new mongoose.Schema({
+const unverifiedSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -47,10 +47,9 @@ const verifiedSchema = new mongoose.Schema({
       return convertISTtoUTC(currentDateIST);
     }
   },
-  // tempOTP:{
-  // type:Number,
-  // expiry
-  // },
+  otp: {
+    type: Number
+  },
   isVerified: {
     type: Boolean,
     default: false,
@@ -58,27 +57,7 @@ const verifiedSchema = new mongoose.Schema({
   }
 })
 
-// ************* generating Token *********************
 
-verifiedSchema.methods.generateAuthToken = async function () {
-  try {
-    const token = await jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
-    this.tokens = this.tokens.concat({ token });
-    return token;
-  } catch (error) {
-    res.send(error);
-    console.log(error);
-  }
-}
+const unverifiedUser = new mongoose.model("unverifiedUser", unverifiedSchema);
 
-
-// ******************** Applying Hashing ******************
-
-verifiedSchema.pre("save", async function (next) {
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-})
-
-const verifiedUser = new mongoose.model("verifiedUser", verifiedSchema);
-
-module.exports = verifiedUser;
+module.exports = unverifiedUser;

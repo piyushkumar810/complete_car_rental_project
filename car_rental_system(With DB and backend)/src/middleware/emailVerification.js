@@ -47,12 +47,9 @@
 
 const nodemailer = require("nodemailer");
 
-const generateOTP = () => {
-  return Math.floor(Math.random() * 100000);
-};
 
-const verifyEmail = async (sender_mail, receiver_mail, sender_pass) => {
-  const otp = generateOTP();
+const verifyEmail = async (sender_mail, receiver_mail, sender_pass, otp) => {
+  // const otp = generateOTP();
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,

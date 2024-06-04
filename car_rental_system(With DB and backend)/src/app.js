@@ -6,14 +6,13 @@ const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8080;
 require("./db/connection");
-const unverifiedUserUser = require("./models/unverifiedUserModel");
-const verifiedUser = require("./models/verifiedUserModel");
+const User = require("./models/UserModel");
+// const verifiedUser = require("./models/verifiedUserModel");
 const Cars = require("./models/carModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
 const emailVerification = require("./middleware/emailVerification");
-
 
 // ******** Paths *************
 
@@ -82,8 +81,6 @@ app.get("/userPage", auth, (req, res) => {
 })
 
 
-
-
 // ************************login(get) section route**************************
 
 app.get("/userLogin", auth, (req, res) => {
@@ -104,25 +101,35 @@ app.get("/userRegistration", (req, res) => {
 
 app.post("/userRegistration", async (req, res) => {
 
+  // ********* Generating OTP *******
+
+  const generateOTP = () => {
+    return Math.floor(Math.random() * 100000);
+  };
+
+
+  const OTP = generateOTP();
   try {
     const EnterPassword = req.body.Create_Password;
     const confirmPassword = req.body.Confirm_Password;
     if (EnterPassword === confirmPassword) {
-      const userDocument = new unverifiedUserUser({
+      const userDocument = new User({
         name: req.body.FullName,
         contact: req.body.Contact,
         email: req.body.Email,
-        password: confirmPassword
+        password: confirmPassword,
+        otp: OTP
       })
 
       // ************* Generating Token *************
-      // const token = await userDocument.generateAuthToken();
+      const token = await userDocument.generateAuthToken();
 
       // *********** Sending Email *****************
-      // const verify = await userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password);
+      const verify = await userDocument.emailVerification("suryask7549@gmail.com", req.body.Email, process.env.Password, OTP);
       // console.log(verify, "Mail Sent Successfully");
       await userDocument.save().then(() => {
         console.log("Registered SuccessFully");
+        res.render("userPage");
       }).catch((error) => {
         console.log("Registration Failed Due to ", error);
       });
@@ -144,7 +151,6 @@ app.post("/userLogin", async (req, res) => {
     // console.log(isUser);
     const isMatch = await bcrypt.compare(password, isUser.password);
     // console.log(isMatch);
-
     const token = await isUser.generateAuthToken();
     if (isUser) {
       if (isMatch) {
@@ -175,12 +181,25 @@ app.get("/mailverification", (req, res) => {
   res.render("mailVerification");
 })
 
-// 
+//
 
-app.post("/mailverification", (req, res) => {
+app.post("/mailverification", async (req, res) => {
+  try {
+    const verifyEmail = req.body.verifyingEmail;
+    const verifyOTP = req.body.otp;
 
+    // Checking if user exists
+    const isUser = await User.findOne({ email: verifyEmail });
+    if (isUser) {
 
+    }
+
+  } catch (error) {
+
+  }
 })
+
+
 
 
 // ****** Forgot Password ************
@@ -205,6 +224,7 @@ app.post("/forgetPassword", (req, res) => {
 
 // ******** Collections  *********
 app.get("/collections", (req, res) => {
+  console.log(h);
   res.send("collections");
 })
 
@@ -219,6 +239,12 @@ app.post("/makeEntry", (req, res) => {
 
 });
 
+
+// *****************  Procced for Email ********
+
+app.get("/proccedForOTP", (req, res) => {
+  res.render("proccedForOTP");
+})
 
 
 
