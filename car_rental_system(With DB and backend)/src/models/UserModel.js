@@ -55,7 +55,6 @@ const { date } = require("faker/lib/locales/az");
     },
     isVerified: {
       type: Boolean,
-      default: false,
       required: true
     },
     otp: {

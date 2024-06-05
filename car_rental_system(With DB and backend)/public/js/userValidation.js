@@ -159,7 +159,7 @@ submit_btn.onclick = (e) => {
   for (let i = 0; i < form.elements.length; i++) {
     let element = form.elements[i];
 
-    if (element.type !== "submit" && element.classList.contains("Error-Input")) {
+    if ((element.type !== "submit" && element.classList.contains("Error-Input")) || (element.type !== "submit" && element.value.length == 0)) {
       element.focus();
       alert("Please fill all necessary fields correctly");
       isValid = false;
