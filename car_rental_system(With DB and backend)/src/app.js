@@ -131,6 +131,7 @@ app.post("/userRegistration", async (req, res) => {
       // *********** Sending Email *****************
       verifyEmail("suryask7549@gmail.com", receiver, process.env.Password, OTP);
       console.log("Mail Sent Successfully");
+      // res.render("mailVerification");
       res.render("mailVerification");
       await userDocument.save();
       console.log("User Registerd");

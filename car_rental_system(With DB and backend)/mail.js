@@ -10,14 +10,14 @@ const verifyEmail = () => {
       secure: "true",
       port: 465,
       auth: {
-        user: "suryask7549@gmail.com",
-        pass: "eugb xzqq ebvd fgvw"
+        user: "senderEmailhere",
+        pass: "password created in mail App"
       }
     })
 
     const receiver = {
-      from: "suryask7549@gmail.com",
-      to: "sauryask07@gmail.com",
+      from: "sendermailhere",
+      to: "receivermail",
       subject: "Testing",
       text: `${otp} Please verify`
     }
