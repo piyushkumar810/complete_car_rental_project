@@ -86,11 +86,6 @@ app.get("/userPage", auth, (req, res) => {
 
 
 
-// ************************login(get) section route**************************
-
-app.get("/userLogin", (req, res) => {
-  res.render("userLogin");
-})
 
 
 // ************************** Registration get Route**************
@@ -178,6 +173,16 @@ app.post("/mailverification", async (req, res) => {
     console.log(error);
   }
 })
+
+
+// ************************login(get) section route**************************
+
+app.get("/userLogin", (req, res) => {
+  res.render("userLogin");
+})
+
+
+
 // ************************login(post) section route**************************
 app.post("/userLogin", async (req, res) => {
   try {
@@ -214,6 +219,14 @@ app.post("/userLogin", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+})
+// ****** Forgot Password ************
+
+app.get("/logout", auth, async (req, res) => {
+  res.clearCookie("jwt");
+  await req.user.save();
+  console.log("Logged out");
+  res.render("login");
 })
 
 
