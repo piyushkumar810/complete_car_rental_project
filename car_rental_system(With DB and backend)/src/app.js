@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 3000;
 require("./db/connection");
 const User = require("./models/UserModel");
+const hbs = require("hbs");
 const Cars = require("./models/carModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -20,7 +21,8 @@ const verifyEmail = require("./middleware/emailVerification");
 const staticPath = path.join(__dirname, "../public");
 // Path for views directory
 const viewsPath = path.join(__dirname, "../templates/views");
-
+// Path for Partials
+const partialPath = path.join(__dirname, "../templates/partials");
 
 // Middleware
 app.use(cookieParser());
@@ -31,6 +33,7 @@ app.use(express.static(staticPath));
 // View Engines 
 app.set("views", viewsPath);
 app.set("view engine", "hbs");
+hbs.registerPartials(partialPath);
 
 
 // ********************homepage route**********************
