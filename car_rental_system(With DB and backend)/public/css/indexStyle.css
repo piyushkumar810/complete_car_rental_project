@@ -120,36 +120,6 @@ header.shadow #search-icon {
     transition: 0.3s;
 }
 
-/* #search-icon{
-    font-size: 24px;
-    cursor: pointer;
-} 
-
-.search-box{
-    position: absolute;
-    top: 10%;
-    right: 0;
-    left: 0;
-    background: var(--text-color);
-    box-shadow: 4px 4px 20px rgba(72, 80, 55, 100%);
-    border: 1px solid var(--main-color);
-    border-radius: 0.5rem;
-    clip-path: circle(0% at 100% 0%);
-}
-
-.search-box.active{
-    clip-path: circle(144% at 100% 0%);
-    transition: 0.4s;
-}
-.search-box input{
-    width: 100%;
-    padding: 15px;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 1rem;
-} */
-
 .login-container .loginBtn {
     display: inline-block;
     padding: 10px 20px;

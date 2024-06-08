@@ -35,6 +35,9 @@ html::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 
+section {
+  padding: 64px 0 32px;
+}
 
 img {
   width: 100%;

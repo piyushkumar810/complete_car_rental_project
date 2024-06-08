@@ -41,28 +41,28 @@ app.get("/home", (req, res) => {
 
 // ********************services route************************
 
-app.get("/services", auth, (req, res) => {
+app.get("/services", (req, res) => {
   res.render("services");
 })
 
 
 // *******************about section route**********************
 
-app.get("/about", auth, (req, res) => {
+app.get("/about", (req, res) => {
   res.render("about");
 })
 
 
 // ************************blog section route**************************
 
-app.get("/blog", auth, (req, res) => {
+app.get("/blog", (req, res) => {
   res.render("blog");
 })
 
 
 // ************************collection section route**************************
 
-app.get("/contact-us", auth, (req, res) => {
+app.get("/contact-us", (req, res) => {
   res.render("contact_us");
 })
 
@@ -167,7 +167,7 @@ app.post("/mailverification", async (req, res) => {
             isVerified: true
           }
         })
-        res.send("verification Completed Successfully");
+        res.render("registered_Successfullly");
       }
     }
 

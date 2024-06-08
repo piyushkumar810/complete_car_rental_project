@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   font-size: 'poppins', 'sans-serif';
+  transition-duration: 0.3s;
 }
 
 :root {
@@ -168,7 +169,8 @@
 .contactForm .inputBox input[type="submit"]:hover {
   background: black;
   color: #eddf46;
-  font-weight: 550;
+  transform: scale(1.1);
+  /* font-weight: 550; */
 }
 
 

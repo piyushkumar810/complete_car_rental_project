@@ -4,7 +4,6 @@ const registerLink = document.querySelector('.register-link');
 // const closeIcon=document.querySelector('.icon-close')
 
 
-
 registerLink.addEventListener('click', () => {
   container.classList.add('active')
 })
