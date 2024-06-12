@@ -2,57 +2,52 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 (async () => {
-
   try {
     await mongoose.connect("mongodb://localhost:27017/UserDB");
     console.log("Connected Successfully");
-
   } catch (error) {
-    console.log(error);
+    console.error("Connection error", error);
   }
-
 })();
-
-
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-
-// Hashing 
-
-userSchema.pre("save", function (next) {
-  if (this.isModified("password")) {
+// Hashing the password before saving
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     return next();
   }
-  this.password = bcrypt.hash(this.password, 10);
-})
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
-
-// Compare function
-
+// Compare password method
 userSchema.methods.comparePassword = function (plaintext, callback) {
-  return callback(null, bcrypt.compare(plaintext, this.password))
-}
+  bcrypt.compare(plaintext, this.password, (err, isMatch) => {
+    if (err) return callback(err);
+    callback(null, isMatch);
+  });
+};
 
-// Model
-
-const userModel = new mongoose.model("userModel", userSchema);
-
-
-
-module.exports = userModel;
+const User = mongoose.model("User", userSchema);
+module.exports = User;

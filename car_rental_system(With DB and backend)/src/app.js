@@ -27,8 +27,28 @@ const partialPath = path.join(__dirname, "../templates/partials");
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(staticPath));
+
+
+
+// Sessions
+// app.use(
+//   session({
+//     key: process.env.SESSION_ID,
+//     secret: process.env.SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       expires: 3 * 24 * 60 * 60 * 1000, // 3 Days
+//       secure: false,
+//       httpOnly: true,
+//       sameSite: "strict",
+//     },
+//   })
+// );
+
 
 // View Engines 
 app.set("views", viewsPath);
@@ -196,12 +216,7 @@ app.post("/userLogin", async (req, res) => {
       const isMatch = await bcrypt.compare(password, isUser.password);
       if (isMatch) {
         if (isUser.isVerified === true) {
-          const token = await isUser.generateAuthToken();
-          res.cookie("jwt", token, {
-            expires: new Date(Date.now() + (60 * 60)),
-            httpOnly: true,
-            secure: true
-          })
+          req.session.user = user;
           res.status(201).render("logged_In_Successfully");
         }
         else {

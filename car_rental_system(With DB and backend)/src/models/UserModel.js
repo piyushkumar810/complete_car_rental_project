@@ -38,12 +38,6 @@ const { date } = require("faker/lib/locales/az");
       required: true,
       trim: true
     },
-    tokens: [{
-      token: {
-        type: String,
-        required: true
-      }
-    }],
     time: {
       type: Date,
       default: function () {
@@ -62,26 +56,23 @@ const { date } = require("faker/lib/locales/az");
     }
   });
 
-  // ************* generating Token *********************
 
-  registrationSchema.methods.generateAuthToken = async function () {
-    try {
-      const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
-      this.tokens = this.tokens.concat({ token });
-      return token;
-    } catch (error) {
-      res.send(error);
-      console.log(error);
-    }
-  }
 
 
   // ******************** Applying Hashing ******************
 
   registrationSchema.pre("save", async function (next) {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  })
+    if (!this.isModified("password")) {
+      return next();
+    }
+    try {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });
 
 
   const User = new mongoose.model("User", registrationSchema);
