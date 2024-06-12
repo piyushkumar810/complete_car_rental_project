@@ -34,20 +34,20 @@ app.use(express.static(staticPath));
 
 
 // Sessions
-// app.use(
-//   session({
-//     key: process.env.SESSION_ID,
-//     secret: process.env.SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       expires: 3 * 24 * 60 * 60 * 1000, // 3 Days
-//       secure: false,
-//       httpOnly: true,
-//       sameSite: "strict",
-//     },
-//   })
-// );
+app.use(
+  session({
+    key: process.env.SESSION_ID,
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 3 * 24 * 60 * 60 * 1000, // 3 Days
+      secure: false,
+      httpOnly: true,
+      sameSite: "strict",
+    },
+  })
+);
 
 
 // View Engines 
