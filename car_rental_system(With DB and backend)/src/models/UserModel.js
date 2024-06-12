@@ -75,6 +75,15 @@ const { date } = require("faker/lib/locales/az");
   });
 
 
+
+  // Comparing Password
+  registrationSchema.methods.comparePassword = function (plaintext, callback) {
+    bcrypt.compare(plaintext, this.password, (err, isMatch) => {
+      if (err) return callback(err);
+      callback(null, isMatch);
+    });
+  };
+
   const User = new mongoose.model("User", registrationSchema);
 
   module.exports = User;

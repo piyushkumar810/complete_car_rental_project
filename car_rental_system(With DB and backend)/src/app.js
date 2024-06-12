@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 require("./db/connection");
 const User = require("./models/UserModel");
@@ -13,6 +14,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
 const verifyEmail = require("./middleware/emailVerification");
+const session = require("express-session");
 
 
 // ******** Paths *************
@@ -25,9 +27,9 @@ const viewsPath = path.join(__dirname, "../templates/views");
 const partialPath = path.join(__dirname, "../templates/partials");
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(staticPath));
 
@@ -48,6 +50,26 @@ app.use(
     },
   })
 );
+
+
+// Middleware to check if user is logged in for protected routes
+const requireLogin = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    next();
+  } else {
+    res.redirect("/userlogin");
+  }
+};
+
+
+// Middleware to prevent logged-in users from accessing login/signup pages
+const sessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.redirect("/userPage");
+  } else {
+    next();
+  }
+};
 
 
 // View Engines 
@@ -90,27 +112,17 @@ app.get("/contact-us", (req, res) => {
 })
 
 
-// ************************Admin section route**************************
-
-app.get("/admin", auth, (req, res) => {
-  res.render("admin");
-})
-
-
 // ************************UserPage section route**************************
 
-app.get("/userPage", auth, (req, res) => {
+app.get("/userPage", requireLogin, (req, res) => {
   res.render("userPage");
 })
 
 
 
-
-
-
 // ************************** Registration get Route**************
 
-app.get("/userRegistration", (req, res) => {
+app.get("/userRegistration", sessionChecker, (req, res) => {
   res.render("userRegistration");
 })
 
@@ -141,11 +153,6 @@ app.post("/userRegistration", async (req, res) => {
       })
 
 
-
-      // ************* Generating Token *************
-      const token = await userDocument.generateAuthToken();
-
-
       // *********** Sending Email *****************
       verifyEmail("suryask7549@gmail.com", receiver, process.env.Password, OTP);
       console.log("Mail Sent Successfully");
@@ -162,7 +169,7 @@ app.post("/userRegistration", async (req, res) => {
 
 // *****************  OTP Verification *************
 
-app.get("/mailverification", (req, res) => {
+app.get("/mailverification", sessionChecker, (req, res) => {
   res.render("mailVerification");
 })
 
@@ -197,7 +204,7 @@ app.post("/mailverification", async (req, res) => {
 
 // ************************login(get) section route**************************
 
-app.get("/userLogin", (req, res) => {
+app.get("/userLogin", sessionChecker, (req, res) => {
   res.render("userLogin");
 })
 
@@ -207,16 +214,17 @@ app.get("/userLogin", (req, res) => {
 app.post("/userLogin", async (req, res) => {
   try {
     const email = req.body.Email;
+    // console.log(email);
     const password = req.body.Password;
     console.log(password);
     const isUser = await User.findOne({ email });
-    // console.log(isUser);
-    // console.log(isMatch);
+    console.log(isUser);
+    const isMatch = await bcrypt.compare(password, isUser.password);
+
     if (isUser) {
-      const isMatch = await bcrypt.compare(password, isUser.password);
       if (isMatch) {
         if (isUser.isVerified === true) {
-          req.session.user = user;
+          req.session.user = isUser;
           res.status(201).render("logged_In_Successfully");
         }
         else {
@@ -235,19 +243,13 @@ app.post("/userLogin", async (req, res) => {
     console.log(error);
   }
 })
-// ****** Forgot Password ************
 
-app.get("/logout", auth, async (req, res) => {
-  res.clearCookie("jwt");
-  await req.user.save();
-  console.log("Logged out");
-  res.render("login");
-})
+
 
 
 // ****** Forgot Password ************
 
-app.get("/forgetPassword", auth, (req, res) => {
+app.get("/forgetPassword", sessionChecker, (req, res) => {
   res.render("forgotPassword");
 })
 
@@ -259,14 +261,41 @@ app.post("/forgetPassword", (req, res) => {
 
 
 
+// ****** logout ************
+app.get("/logout", sessionChecker, async (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.clearCookie("user_sid");
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/userlogin");
+      }
+    });
+  } else {
+    res.redirect("/userlogin");
+  }
+})
+
+
+
+
+
+
 
 // ****************   Car Related Routes ***************
 
 
+// ************************Admin section route**************************
+
+app.get("/admin", (req, res) => {
+  res.render("admin");
+})
+
 
 
 // ******** Collections  *********
-app.get("/collections", (req, res) => {
+app.get("/collections", sessionChecker, (req, res) => {
   res.send("collections");
 })
 
