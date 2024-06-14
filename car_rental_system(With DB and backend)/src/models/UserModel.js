@@ -53,6 +53,9 @@ const { date } = require("faker/lib/locales/az");
     },
     otp: {
       type: Number,
+    },
+    otpExpires: {
+      type: Date, // Added field to store OTP expiration time
     }
   });
 
