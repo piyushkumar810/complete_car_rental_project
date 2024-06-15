@@ -421,16 +421,17 @@ app.get("/home", (req, res) => {
   res.render("homepage");
 })
 
-// ********************services route************************
-
-app.get("/services", (req, res) => {
-  res.render("services");
-})
 
 // *******************about section route**********************
 
 app.get("/about", (req, res) => {
   res.render("about");
+})
+
+// ********************services route************************
+
+app.get("/services", (req, res) => {
+  res.render("services");
 })
 
 // ************************blog section route**************************
@@ -443,12 +444,6 @@ app.get("/blog", (req, res) => {
 
 app.get("/contact-us", (req, res) => {
   res.render("contact_us");
-})
-
-// ************************UserPage section route**************************
-
-app.get("/userPage", requireLogin, (req, res) => {
-  res.render("userPage");
 })
 
 // ************************** Registration get Route**************
@@ -465,7 +460,7 @@ app.post("/userRegistration", async (req, res) => {
   };
 
   const OTP = generateOTP();
-  const otpExpires = new Date(Date.now() + 1000 * 6); // 10 minutes from now
+  const otpExpires = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes from now
 
   try {
     const EnterPassword = req.body.Create_Password;
@@ -517,7 +512,7 @@ app.post("/mailverification", async (req, res) => {
             isVerified: true
           }
         });
-        res.render("registered_Successfully");
+        res.render("registered_Successfullly");
       } else if (currentTime >= isUser.otpExpires) {
         res.status(400).send("OTP has expired. Please request a new one.");
       } else {
@@ -531,6 +526,26 @@ app.post("/mailverification", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 })
+
+
+// ******************* sendEmail ****************************
+
+app.route("/sendEmail")
+  .get((req, res) => {
+    res.render("sendEmail")
+  })
+  .patch(async (req, res) => {
+    const email = req.body.email;
+    const isRegistered = await User.findOne({ email });
+    if (isRegistered) {
+      const generateOTP = () => {
+        return Math.floor(Math.random() * 100000);
+      };
+      const OTP = generateOTP();
+      const otpExpires = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes from now
+    }
+  })
+
 
 // ************************login(get) section route**************************
 
@@ -565,6 +580,17 @@ app.post("/userLogin", async (req, res) => {
   }
 })
 
+
+
+// ************************UserPage section route**************************
+
+app.get("/userPage", requireLogin, (req, res) => {
+  res.render("userPage");
+})
+
+
+
+
 // ****** Forgot Password ************
 
 app.get("/forgetPassword", sessionChecker, (req, res) => {
@@ -575,6 +601,8 @@ app.get("/forgetPassword", sessionChecker, (req, res) => {
 app.post("/forgetPassword", (req, res) => {
   // res.render("forgotPassword");
 })
+
+
 
 // ****** logout ************
 app.get("/logout", sessionChecker, async (req, res) => {
@@ -591,6 +619,10 @@ app.get("/logout", sessionChecker, async (req, res) => {
     res.redirect("/userlogin");
   }
 })
+
+
+
+
 
 // ****************   Car Related Routes ***************
 
