@@ -456,7 +456,7 @@ app.get("/userRegistration", sessionChecker, (req, res) => {
 
 app.post("/userRegistration", async (req, res) => {
   const generateOTP = () => {
-    return Math.floor(Math.random() * 100000);
+    return Math.floor(Math.random() * 1000000);
   };
 
   const OTP = generateOTP();
@@ -480,8 +480,8 @@ app.post("/userRegistration", async (req, res) => {
       // *********** Sending Email *****************
       verifyEmail("suryask7549@gmail.com", receiver, process.env.Password, OTP);
       console.log("Mail Sent Successfully");
-      res.render("mailVerification");
       await userDocument.save();
+      res.redirect("mailVerification");
       console.log("User Registered");
     } else {
       res.status(400).send("Passwords do not match.");
@@ -530,21 +530,49 @@ app.post("/mailverification", async (req, res) => {
 
 // ******************* sendEmail ****************************
 
-app.route("/sendEmail")
-  .get((req, res) => {
-    res.render("sendEmail")
-  })
-  .patch(async (req, res) => {
+app.get("/sendEmail", (req, res) => {
+  res.render("sendEmail")
+});
+
+app.post("/sendEmail", async (req, res) => {
+  try {
     const email = req.body.email;
+    console.log(email);
     const isRegistered = await User.findOne({ email });
+    console.log(isRegistered);
     if (isRegistered) {
-      const generateOTP = () => {
-        return Math.floor(Math.random() * 100000);
-      };
-      const OTP = generateOTP();
-      const otpExpires = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes from now
+      if (!isRegistered.isVerified) {
+        const generateOTP = () => {
+          return Math.floor(Math.random() * 900000);
+        };
+        const OTP = generateOTP();
+        const otpExpires = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes from now
+        await verifyEmail("suryask7549@gmail.com", email, process.env.Password, OTP);
+        console.log("Mail Sent");
+        await User.updateOne({ email }, {
+          $set: {
+            otp: OTP,
+            otpExpires: otpExpires
+          }
+        })
+        console.log("Fields Updated");
+        res.redirect("/mailverification");
+      }
+      else {
+        console.log("User Already Verified ");
+        res.redirect("/userLogin");
+
+      }
     }
-  })
+    else {
+      // res.send("User Not Registered");
+      console.log("User Not Registered");
+      res.redirect("/userRegistration");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 
 // ************************login(get) section route**************************
@@ -598,9 +626,43 @@ app.get("/forgetPassword", sessionChecker, (req, res) => {
 })
 
 // ****** Forgot Password (POST Method)************
-app.post("/forgetPassword", (req, res) => {
-  // res.render("forgotPassword");
+app.post("/forgetPassword", async (req, res) => {
+  try {
+
+    const { email, password } = req.body;
+    const isUser = await User.findOne({ email });
+    if (isUser) {
+      const isPasswordMatch = await bcrypt.compare(password, isUser.password);
+      if (isPasswordMatch) {
+        res.redirect("/changePassword");
+      }
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
 })
+
+// ********************** Change Password *****************
+
+app.get("/changePassword", (req, res) => {
+  res.render("changePassword");
+})
+
+app.patch("/changePassword", async (req, res) => {
+  try {
+
+    const { createPassword, confirmPassword } = req.body;
+
+    if (createPassword === confirmPassword) {
+
+    }
+
+  } catch (error) {
+
+  }
+})
+
 
 
 

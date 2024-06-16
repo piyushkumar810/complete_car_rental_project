@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login page</title>
   <!-- Link The Css File -->
-  <link rel="stylesheet" href="css/userLogin.css">
+  <link rel="stylesheet" href="style.css">
 
   <!-- Using Box Icons -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -24,16 +24,16 @@
       <form action="/userLogin" method="POST">
         <div class="input-box">
           <span class="icon"><i class='bx bxs-envelope'></i></span>
-          <input type="email" name="Email" value="" class="email" required="required" />
+          <input type="email" name="Email" id="Email" class="email" required="required" />
           <label for="Email">Email</label>
         </div>
         <div class="input-box">
           <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-          <input type="password" required name="Password" value="" required="required" />
+          <input type="password" required name="Password" id="Password" value="" required="required" />
           <label for="Password">password</label>
         </div>
         <div class="remember-forgot">
-          <label for="RememberMe"><input type="checkbox" name="RememberMe" id="RememberMe">
+          <label for="RememberMe"><input type="checkbox" name="RememberMe" id="RememberMe" title="no">
             Remember Me
           </label>
 
@@ -49,8 +49,7 @@
       </form>
     </div>
   </div>
-  {{!--
-  <script src="js/userLogInValidation.js"></script> --}}
 </body>
+<script src="script.js"></script>
 
 </html>

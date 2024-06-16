@@ -33,7 +33,7 @@ const mongoose = require("mongoose");
       required: true,
       min: 2000,
     },
-    car_id: {
+    registrationNumber: {
       type: String,
       required: true,
       unique: true,
@@ -44,12 +44,15 @@ const mongoose = require("mongoose");
       default: Date.now,
     },
     features: {
-      type: [String],
+      type: String,
     },
     description: {
-      type: [String],
+      type: String,
       default: "We're really sorry for the inconvience ....! The description for this car is not available at the moment"
 
+    },
+    launchedDate: {
+      type: String
     }
   });
 
