@@ -357,35 +357,6 @@ app.get("/collections", sessionChecker, (req, res) => {
 
 // **************  Registering New Car ************
 
-app.get("/makeEntry", (req, res) => {
-  res.render("carRegistration");
-});
-app.post("/makeEntry", async (req, res) => {
-
-
-  try {
-    const newCar = new Car({
-      name: req.body.carName,
-      manufacturer: req.body.manufacturer,
-      modelName: req.body.carModel,
-      mileage: req.body.carMileage,
-      no_of_seats: req.body.no_of_seats,
-      color: req.body.car_color,
-      price: req.body.carPrice,
-      registrationNumber: req.body.registartion_number,
-      description: req.body.carDescription,
-      launchedDate: req.body.launchDate
-    })
-
-    await newCar.save();
-    console.log("Details saved");
-    res.redirect("/home");
-
-  } catch (error) {
-    console.log(error);
-  }
-
-});
 
 // **************** Page Not Found ***************
 
