@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!----======== CSS ======== -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/carRegistration.css">
 
   <!----===== Iconscout CSS ===== -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -19,7 +19,7 @@
   <div class="container">
     <header>Registration</header>
 
-    <form action="#">
+    <form action="/makeEntry" method="post">
       <div class="form first">
         <div class="details personal">
           <span class="title">Car Details</span>
@@ -27,70 +27,76 @@
           <div class="fields">
             <div class="input-field">
               <label for="carName">Car Name</label>
-              <input type="text" placeholder="Enter Car name" required id="carName" id="carName">
-            </div>
-
-            <div class="input-field">
-              <label for="carModel">Car Model</label>
-              <input type="text" placeholder="Enter Model" required id="carModel" name="carModel">
-            </div>
-
-            <div class="input-field">
-              <label for="carMileage">Mileage</label>
-              <input type="text" placeholder="Enter Car Mileage" required id="carMileage" name="carMilegae">
-            </div>
-
-            <div class="input-field">
-              <label for="no_of_seats">Number of Seats</label>
-              <input type="number" placeholder="Seats" required id="no_of_seats" name="no_of_seats">
-            </div>
-
-            <div class="input-field">
-              <label for="car_color">Color</label>
-              <input type="text" placeholder="Car color" required id="car_color" name="car_color">
+              <input type="text" placeholder="Enter Car name" required id="carName" name="carName">
             </div>
 
 
-            <div class="input-field">
-              <label for="carPrice">Price</label>
-              <input type="number" placeholder="" required name="carPrice" id="carPrice">
+            <div class="fields">
+              <div class="input-field">
+                <label for="carName">Manufacturer</label>
+                <input type="text" placeholder="Created By" required id="manufacturer" name="manufacturer">
+              </div>
+
+              <div class="input-field">
+                <label for="carModel">Car Model</label>
+                <input type="text" placeholder="Enter Model" required id="carModel" name="carModel">
+              </div>
+
+              <div class="input-field">
+                <label for="carMileage">Mileage</label>
+                <input type="number" placeholder="Enter Car Mileage" required id="carMileage" name="carMileage">
+              </div>
+
+              <div class="input-field">
+                <label for="no_of_seats">Number of Seats</label>
+                <input type="number" placeholder="Seats" required id="no_of_seats" name="no_of_seats">
+              </div>
+
+              <div class="input-field">
+                <label for="car_color">Color</label>
+                <input type="text" placeholder="Car color" required id="car_color" name="car_color">
+              </div>
+
+
+              <div class="input-field">
+                <label for="carPrice">Price</label>
+                <input type="number" placeholder="" required name="carPrice" id="carPrice">
+              </div>
+            </div>
+          </div>
+
+          <div class="details ID">
+            <span class="title">Identity Details</span>
+
+            <div class="fields">
+              <div class="input-field">
+                <label for="registartion_number">Registration Number</label>
+                <input type="text" placeholder="Registration Car Number" required name="registartion_number"
+                  id="registartion_number">
+              </div>
+
+              <div class="input-field">
+                <label for="carDescription">Description</label>
+                <input type="text" placeholder="Enter Description" required id="carDescription" name="carDescription">
+              </div>
+
+
+              <div class="input-field">
+                <label for="launchDate">Launched Date</label>
+                <input type="date" placeholder="Enter your issued date" required id="launchDate" name="launchDate">
+              </div>
+
+              <button class="sumbit" type="submit">
+                Submit
+              </button>
             </div>
           </div>
         </div>
-
-        <div class="details ID">
-          <span class="title">Identity Details</span>
-
-          <div class="fields">
-            <div class="input-field">
-              <label for="registartion_number">Registration Number</label>
-              <input type="text" placeholder="Registration Car Number" required name="registartion_number"
-                id="registartion_number">
-            </div>
-
-            <div class="input-field">
-              <label for="carDescription">Description</label>
-              <input type="text" placeholder="Enter Description" required id="carDescription" name="carDescription">
-            </div>
-
-
-            <div class="input-field">
-              <label for="launchDate">Launched Date</label>
-              <input type="date" placeholder="Enter your issued date" required id="launchDate" name="launchDate">
-            </div>
-
-
-            <button class="sumbit">
-              <span class="btnText">Submit</span>
-              <i class="uil uil-navigator"></i>
-            </button>
-          </div>
-        </div>
-      </div>
     </form>
   </div>
 
-  <script src="script.js"></script>
+  {{!--
+  <script src="script.js"></script> --}}
 </body>
 
 </html>
