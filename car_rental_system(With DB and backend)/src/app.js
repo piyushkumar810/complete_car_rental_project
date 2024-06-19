@@ -33,6 +33,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(staticPath));
 
 // Sessions
+
+//************  For USer */
+
 app.use(
   session({
     key: "user_session_id",
@@ -48,6 +51,24 @@ app.use(
   })
 );
 
+// *****************  For Admin
+
+app.use(
+  session({
+    key: "admin_session_id",
+    secret: "adminsecretkeyforthesessionbasedauthentication",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 24 * 60 * 60 * 1000, // 1 Days
+      secure: false,
+      httpOnly: true,
+      sameSite: "strict",
+    },
+  })
+);
+
+
 // Middleware to check if user is logged in for protected routes
 const requireLogin = (req, res, next) => {
   if (req.session.user && req.cookies.user_session_id) {
@@ -57,10 +78,30 @@ const requireLogin = (req, res, next) => {
   }
 };
 
+
+// Middleware to check if user is logged in for protected routes
+const adminLogin = (req, res, next) => {
+  if (req.session.user && req.cookies.admin_session_id) {
+    next();
+  } else {
+    res.redirect("/home");
+  }
+};
+
 // Middleware to prevent logged-in users from accessing login/signup pages
 const sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_session_id) {
     res.redirect("/userPage");
+  } else {
+    next();
+  }
+};
+
+
+// Middleware to prevent logged-in users from accessing login/signup pages
+const adminSessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.admin_session_id) {
+    res.redirect("/admin");
   } else {
     next();
   }
@@ -351,11 +392,65 @@ app.get("/admin", (req, res) => {
 })
 
 // ******** Collections  *********
-app.get("/collections", sessionChecker, (req, res) => {
-  res.send("collections");
+app.get("/collections", async (req, res) => {
+
+
+  const data = await Car.find().limit(20);
+  res.render("collections");
+
 })
 
 // **************  Registering New Car ************
+
+app.get("/admin/makeEntry", (req, res) => {
+  res.render("registerCar");
+})
+
+
+app.post("/admin/makeEntry", async (req, res) => {
+  try {
+    const newCar = new Car({
+      make: req.body.make,
+      model: req.body.model,
+      year: req.body.year,
+      vin: req.body.vin,
+      bodyType: req.body.bodyType,
+      engineType: req.body.engineType,
+      transmissionType: req.body.transmissionType,
+      fuelEfficiency: req.body.fuelEfficiency,
+      numberOfSeats: req.body.numberOfSeats,
+      color: req.body.color,
+      dailyRentalRate: req.body.dailyRentalRate,
+      weeklyRentalRate: req.body.weeklyRentalRate,
+      monthlyRentalRate: req.body.monthlyRentalRate,
+      availabilityStatus: req.body.availabilityStatus,
+      location: req.body.location,
+      gpsIncluded: req.body.gpsIncluded === 'on',
+      airConditioning: req.body.airConditioning === 'on',
+      bluetoothConnectivity: req.body.bluetoothConnectivity === 'on',
+      infotainmentSystem: req.body.infotainmentSystem === 'on',
+      additionalFeatures: req.body.additionalFeatures,
+      policyNumber: req.body.policyNumber,
+      expiryDate: req.body.expiryDate,
+      registrationNumber: req.body.registrationNumber,
+      lastInspectionDate: req.body.lastInspectionDate,
+      nextInspectionDate: req.body.nextInspectionDate,
+      exteriorPhotos: req.body.exteriorPhotos, // Assuming photos are provided as an array of strings (URLs or paths)
+      interiorPhotos: req.body.interiorPhotos, // Assuming photos are provided as an array of strings (URLs or paths)
+      currentMileage: req.body.currentMileage,
+      serviceHistory: req.body.serviceHistory,
+      damageDetails: req.body.damageDetails,
+      notes: req.body.notes
+    });
+
+    await newCar.save();
+    console.log("Car Registered");
+    res.render("registered_Successfullly"); // Make sure you have a corresponding view template
+  } catch (error) {
+    console.error("Error registering car: ", error);
+    res.status(500).send("Error registering car");
+  }
+})
 
 
 // **************** Page Not Found ***************
@@ -363,6 +458,7 @@ app.get("/collections", sessionChecker, (req, res) => {
 app.get("*", (req, res) => {
   res.render("404_error_page_not_found");
 })
+
 
 app.listen(port, () => {
   console.log("Listening at port ", port);
