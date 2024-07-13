@@ -258,7 +258,6 @@ app.post("/sendEmail", async (req, res) => {
       else {
         console.log("User Already Verified ");
         res.redirect("/userLogin");
-
       }
     }
     else {
