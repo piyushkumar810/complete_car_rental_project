@@ -392,12 +392,15 @@ app.get("/admin", (req, res) => {
 
 // ******** Collections  *********
 app.get("/collections", async (req, res) => {
+  try {
+    const data = await Car.find().limit(20);
+    res.render("collections", { data });  // Pass the data to the template
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
-
-  const data = await Car.find().limit(20);
-  res.render("collections");
-
-})
 
 // **************  Registering New Car ************
 
