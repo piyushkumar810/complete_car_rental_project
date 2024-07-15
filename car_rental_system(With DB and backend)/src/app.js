@@ -15,7 +15,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("./middleware/authentication");
 const verifyEmail = require("./middleware/emailVerification");
 const session = require("express-session");
-
+const Razorpay = require("razorpay");
 // ******** Paths *************
 
 // Static path for public directory 
@@ -29,6 +29,7 @@ const partialPath = path.join(__dirname, "../templates/partials");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(staticPath));
 
@@ -68,6 +69,15 @@ app.use(
   })
 );
 
+// Session for user data
+
+app.use(session({
+  secret: "secret_key",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }//for 1 day
+}))
+
 
 // Middleware to check if user is logged in for protected routes
 const requireLogin = (req, res, next) => {
@@ -91,7 +101,7 @@ const adminLogin = (req, res, next) => {
 // Middleware to prevent logged-in users from accessing login/signup pages
 const sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_session_id) {
-    res.redirect("/userPage");
+    res.redirect("/collections");
   } else {
     next();
   }
@@ -115,6 +125,9 @@ hbs.registerPartials(partialPath);
 // ********************homepage route**********************
 
 app.get("/home", (req, res) => {
+  res.render("homepage");
+})
+app.get("/", (req, res) => {
   res.render("homepage");
 })
 
@@ -209,7 +222,7 @@ app.post("/mailverification", async (req, res) => {
             isVerified: true
           }
         });
-        res.render("registered_Successfullly");
+        res.redirect("/collections");
       } else if (currentTime >= isUser.otpExpires) {
         res.status(400).send("OTP has expired. Please request a new one.");
       } else {
@@ -282,13 +295,16 @@ app.get("/userLogin", sessionChecker, (req, res) => {
 app.post("/userLogin", async (req, res) => {
   try {
     const email = req.body.Email;
-    const password = req.body.Password;
+    const password = req.body.password;
     const isUser = await User.findOne({ email });
-    const isMatch = await bcrypt.compare(password, isUser.password);
+    console.log(password);
+    console.log(isUser);
     if (isUser) {
+      const isMatch = await bcrypt.compare(password, isUser.password);
       if (isMatch) {
         if (isUser.isVerified === true) {
           req.session.user = isUser;
+          req.session.email = isUser.email;
           res.status(201).render("logged_In_Successfully");
         } else {
           res.render("mailVerification");
@@ -317,7 +333,7 @@ app.get("/userPage", requireLogin, (req, res) => {
 
 // ****** Forgot Password ************
 
-app.get("/forgetPassword", sessionChecker, (req, res) => {
+app.get("/forgetPassword", requireLogin, (req, res) => {
   res.render("forgotPassword");
 })
 
@@ -341,7 +357,7 @@ app.post("/forgetPassword", async (req, res) => {
 
 // ********************** Change Password *****************
 
-app.get("/changePassword", (req, res) => {
+app.get("/changePassword", requireLogin, (req, res) => {
   res.render("changePassword");
 })
 
@@ -391,7 +407,7 @@ app.get("/admin", (req, res) => {
 })
 
 // ******** Collections  *********
-app.get("/collections", async (req, res) => {
+app.get("/collections", requireLogin, async (req, res) => {
   try {
     const data = await Car.find().limit(20);
     res.render("collections", { data });  // Pass the data to the template
@@ -452,6 +468,79 @@ app.post("/admin/makeEntry", async (req, res) => {
     console.error("Error registering car: ", error);
     res.status(500).send("Error registering car");
   }
+})
+
+
+// **************** Order Creation ***************
+app.get('/create-order', requireLogin, (req, res) => {
+
+
+
+  res.render('orders');
+
+});
+
+// **************** Order Creation ***************
+app.post('/create-order', async (req, res) => {
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+  const time = req.body.time;
+  // console.log(process.env.RAZORPAY_KEY_ID);
+  // console.log(process.env.RAZORPAY_KEY_SECRET);
+  const options = {
+    amount: req.body.time * 500, // Amount in the smallest currency unit
+    currency: 'INR',
+    receipt: 'order_rcptid_01',
+    payment_capture: 1,
+  };
+  try {
+    const response = await razorpay.orders.create(options);
+    const email = req.session.email;
+    console.log(email);
+    const user = await User.findOne({ email });
+    console.log(user);
+    res.render('payment', {
+      order_id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+      key_id: process.env.RAZORPAY_KEY_ID,
+    });
+  } catch (error) {
+    console.error('Error creating order:', error);
+    res.status(500).send('Internal Server error');
+  }
+});
+
+// **************** Payment ***************
+app.get('/payment/:paymentId', requireLogin, async (req, res) => {
+  const payment_id = req.params.paymentId;
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+  try {
+    const payment = await razorpay.payments.fetch(payment_id);
+
+    if (!payment) {
+      return res.status(500).json('Error Loading Razorpay');
+    }
+
+    res.json({
+      status: payment.status,
+      method: payment.method,
+      amount: payment.amount,
+      currency: payment.currency,
+    });
+  } catch (error) {
+    console.error('Error fetching payment:', error);
+    res.status(500).json('Failed to fetch payment details');
+  }
+});
+
+app.get('/try', (req, res) => {
+  res.render("mailVerification");
 })
 
 

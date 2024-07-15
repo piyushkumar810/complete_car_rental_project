@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 75vw;
+            margin-top: 10px;
+        }
+
+        .contact-form {
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            /*  margin-bottom: 1em;*/
+        }
+
+        legend {
+            /* font-weight: bold; */
+            padding: 0 10px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .response {
+            margin-top: 1em;
+            padding: 10px;
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .locations {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        input[id="state"],
+        input[id="district"],
+        input[id="city"] {
+            width: 100%;
+        }
+
+        input[id="nearby"] {
+            width: 140%;
+        }
+
+        input[id="houseNumber"],
+        label[for="houseNumber"] {
+            position: relative;
+            left: 80px;
+        }
+
+        input[id="houseNumber"] {
+            width: 70%;
+        }
+
+        input[id="time"] {
+            width: 20%;
+        }
+
+        .calling {
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="contactForm" class="contact-form">
+            <h2>Booking Details</h2>
+
+            <fieldset class="locations">
+                <legend>Picking Location</legend>
+                <div class="form-group">
+                    <p>
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" required>
+                    </p>
+                    <p>
+                        <label for="district">District:</label>
+                        <input type="text" id="district" name="district" required>
+                    </p>
+                    <p>
+                        <label for="code">Pin Code:</label>
+                        <input type="text" id="code" name="code" required>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" required>
+                    </p>
+                    <p>
+                        <label for="nearby">Nearby Location:</label>
+                        <input type="text" id="nearby" name="nearby" required>
+                    </p>
+                    <p>
+                        <label for="houseNumber">House/Building Number:</label>
+                        <input type="text" id="houseNumber" name="houseNumber" required>
+                    </p>
+                </div>
+                <div class="form-group calling">
+                    <label for="callingNumber">Calling Number:</label>
+                    <input type="text" id="callingNumber" name="callingNumber" required>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="purpose">Purpose:</label>
+                <!-- <input type="text" id="purpose" name="purpose" required> -->
+                <textarea name="purpose" id="purpose"></textarea>
+            </div>
+
+
+            <fieldset style="display: flex;gap:3rem;">
+                <legend>Time and Date</legend>
+                <div class="form-group">
+                    <label for="time">Time in Hours:</label>
+                    <input type="number" id="time" name="time" required>
+                </div>
+                <div class="form-group" style="gap:0.5rem;">
+                    <label for="date">Journey Date : </label><br><br>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+            </fieldset>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+
+</body>
+
+</html>

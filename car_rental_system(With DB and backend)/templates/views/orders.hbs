@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bookingDetails.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+            <form id="contactForm" class="contact-form" action="/create-order" method="post">
+                <h2>Booking Details</h2>
+                <fieldset class="locations">
+                    <legend>Picking Location</legend>
+                    <div class="form-group">
+                        <p>
+                            <label for="state">State:</label>
+                            <input type="text" id="state" name="state" required>
+                        </p>
+                        <p>
+                            <label for="district">District:</label>
+                            <input type="text" id="district" name="district" required>
+                        </p>
+                        <p>
+                            <label for="code">Pin Code:</label>
+                            <input type="text" id="code" name="code" required>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" required>
+                        </p>
+                        <p>
+                            <label for="nearby">Nearby Location:</label>
+                            <input type="text" id="nearby" name="nearby" required>
+                        </p>
+                        <p>
+                            <label for="houseNumber">House/Building Number:</label>
+                            <input type="text" id="houseNumber" name="houseNumber" required>
+                        </p>
+                    </div>
+                    <div class="form-group calling">
+                        <label for="callingNumber">Calling Number:</label>
+                        <input type="text" id="callingNumber" name="callingNumber" required>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="purpose">Purpose:</label>
+                    <!-- <input type="text" id="purpose" name="purpose" required> -->
+                    <textarea name="purpose" id="purpose"></textarea>
+                </div>
+
+
+                <fieldset style="display: flex;gap:3rem;">
+                    <legend>Time and Date</legend>
+                    <div class="form-group">
+                        <label for="time">Time in Hours:</label>
+                        <input type="number" id="time" name="time" required>
+                    </div>
+                    <div class="form-group" style="gap:0.5rem;">
+                        <label for="date">Journey Date : </label><br><br>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                </fieldset>
+
+                <button type="submit">Submit</button>
+            </form>
+            <div id="response" class="response"></div>
+        </div>
+
+    </body>
+
+</html>
