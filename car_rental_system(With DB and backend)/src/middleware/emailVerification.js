@@ -6,8 +6,8 @@ const verifyEmail = (sender, receiver_mail, sender_pass, otp) => {
       secure: "true",
       port: 465,
       auth: {
-        user: sender,
-        pass: sender_pass
+        user: "surya_mail",
+        pass: "llrh mikb vezq igri"
       }
     })
 
