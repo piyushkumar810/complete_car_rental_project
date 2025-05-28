@@ -367,11 +367,11 @@ app.patch("/changePassword", async (req, res) => {
     const { createPassword, confirmPassword } = req.body;
 
     if (createPassword === confirmPassword) {
-
+      // still working
     }
 
   } catch (error) {
-
+    console.log(error);
   }
 })
 
@@ -473,9 +473,6 @@ app.post("/admin/makeEntry", async (req, res) => {
 
 // **************** Order Creation ***************
 app.get('/create-order', requireLogin, (req, res) => {
-
-
-
   res.render('orders');
 
 });
