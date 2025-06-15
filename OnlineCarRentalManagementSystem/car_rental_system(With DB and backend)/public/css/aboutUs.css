@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', 'sans-serif';
+}
+
+:root {
+  --text-color: rgb(243, 238, 238);
+}
+
+body {
+  background: #12172b;
+}
+
+.container {
+  margin: 20px 40px;
+  color: var(--text-color);
+}
+
+.heading {
+  font-size: 60px;
+  color: var(--text-color);
+}
+
+.heading span {
+  font-size: 25px;
+  font-style: italic;
+}
+
+.profiles {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 80px;
+}
+
+.profile {
+  flex-basis: 260px;
+}
+
+.profile img {
+  height: 250px;
+  width: 250px;
+  border-radius: 5px;
+  /* filter: grayscale(100%); */
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.profile:hover img:hover {
+  transform: scale(1.2);
+}
+
+.Developer_name {
+  margin-top: 20px;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile h5 {
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 3px;
+  color: var(--text-color);
+}
+
+.profile p {
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: justify;
+}
+
+
+/* --------------------------responsive design */
+
+@media(max-width:1150px) {
+  .profiles {
+    flex-direction: column;
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile p {
+    text-align: center;
+    margin: 20px 60px 80px 60px;
+    font-size: 20px;
+  }
+}
+
+
+@media(max-width:900px) {
+  .heading {
+    font-size: 40px;
+    color: var(--text-color);
+    text-align: center;
+  }
+
+  .heading span {
+    font-size: 15px;
+  }
+
+  .profiles {
+    margin: 20px 0;
+  }
+
+  .profile p {
+    margin: 20px 10px 80px 10px;
+  }
+}

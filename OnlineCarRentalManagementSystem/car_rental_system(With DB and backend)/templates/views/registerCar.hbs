@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Registration Form</title>
+  <link rel="stylesheet" href="/css/carRegistration.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h2>Register New Car</h2>
+      <form id="carRegistrationForm" method="post" action="/admin/makeEntry">
+        <div class="form-row">
+          <div class="form-col">
+            <fieldset>
+              <legend>Basic Information</legend>
+              <div class="form-group">
+                <label for="make">Car Make</label>
+                <input type="text" class="form-control" id="make" name="make" required placeholder="e.g. Toyota">
+              </div>
+              <div class="form-group">
+                <label for="model">Car Model</label>
+                <input type="text" class="form-control" id="model" name="model" required placeholder="e.g. Camry">
+              </div>
+              <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" class="form-control" id="year" name="year" required placeholder="e.g. 2023">
+              </div>
+              <div class="form-group">
+                <label for="vin">VIN</label>
+                <input type="text" class="form-control" id="vin" name="vin" required placeholder="e.g. ABC12345XYZ789">
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Specifications</legend>
+              <div class="form-group">
+                <label for="bodyType">Body Type</label>
+                <input type="text" class="form-control" id="bodyType" name="bodyType" required placeholder="e.g. Sedan">
+              </div>
+              <div class="form-group">
+                <label for="engineType">Engine Type</label>
+                <input type="text" class="form-control" id="engineType" name="engineType" required
+                  placeholder="e.g. 2.5L Inline-4">
+              </div>
+              <div class="form-group">
+                <label for="transmissionType">Transmission Type</label>
+                <input type="text" class="form-control" id="transmissionType" name="transmissionType" required
+                  placeholder="e.g. Automatic">
+              </div>
+              <div class="form-group">
+                <label for="fuelEfficiency">Fuel Efficiency (mpg)</label>
+                <input type="number" step="0.1" class="form-control" id="fuelEfficiency" name="fuelEfficiency" required
+                  placeholder="e.g. 30">
+              </div>
+              <div class="form-group">
+                <label for="numberOfSeats">Number of Seats</label>
+                <input type="number" class="form-control" id="numberOfSeats" name="numberOfSeats" required
+                  placeholder="e.g. 5">
+              </div>
+              <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" class="form-control" id="color" name="color" required placeholder="e.g. Silver">
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Rental Information</legend>
+              <div class="form-group">
+                <label for="dailyRentalRate">Daily Rental Rate ($)</label>
+                <input type="number" step="0.01" class="form-control" id="dailyRentalRate" name="dailyRentalRate"
+                  required placeholder="e.g. 50">
+              </div>
+              <div class="form-group">
+                <label for="weeklyRentalRate">Weekly Rental Rate ($)</label>
+                <input type="number" step="0.01" class="form-control" id="weeklyRentalRate" name="weeklyRentalRate"
+                  required placeholder="e.g. 300">
+              </div>
+              <div class="form-group">
+                <label for="monthlyRentalRate">Monthly Rental Rate ($)</label>
+                <input type="number" step="0.01" class="form-control" id="monthlyRentalRate" name="monthlyRentalRate"
+                  required placeholder="e.g. 1200">
+              </div>
+              <div class="form-group">
+                <label for="availabilityStatus">Availability Status</label>
+                <select class="form-control" id="availabilityStatus" name="availabilityStatus" required>
+                  <option>Available</option>
+                  <option>Rented</option>
+                  <option>Under Maintenance</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required
+                  placeholder="e.g. Main Street Garage">
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Additional Features</legend>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gpsIncluded" name="gpsIncluded">
+                <label class="form-check-label" for="gpsIncluded">GPS Included</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="airConditioning" name="airConditioning">
+                <label class="form-check-label" for="airConditioning">Air Conditioning</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="bluetoothConnectivity" name="bluetoothConnectivity">
+                <label class="form-check-label" for="bluetoothConnectivity">Bluetooth Connectivity</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="infotainmentSystem" name="infotainmentSystem">
+                <label class="form-check-label" for="infotainmentSystem">Infotainment System</label>
+              </div>
+              <div class="form-group">
+                <label for="additionalFeatures">Additional Features</label>
+                <input type="text" class="form-control" id="additionalFeatures" name="additionalFeatures"
+                  placeholder="eg. Car has AI features ">
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Documentation and Compliance</legend>
+              <div class="form-group">
+                <label for="policyNumber">Insurance Policy Number</label>
+                <input type="text" class="form-control" id="policyNumber" name="policyNumber" required
+                  placeholder="eg. A12-345B-678C">
+              </div>
+              <div class="form-group">
+                <label for="expiryDate">Insurance Expiry Date</label>
+                <input type="date" class="form-control" id="expiryDate" name="expiryDate" required>
+              </div>
+              <div class="form-group">
+                <label for="registrationNumber">Registration Number</label>
+                <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required
+                  placeholder="A12-345B-678CXYZ..">
+              </div>
+              <div class="form-group">
+                <label for="lastInspectionDate">Last Inspection Date</label>
+                <input type="date" class="form-control" id="lastInspectionDate" name="lastInspectionDate" required>
+              </div>
+              <div class="form-group">
+                <label for="nextInspectionDate">Next Inspection Date</label>
+                <input type="date" class="form-control" id="nextInspectionDate" name="nextInspectionDate" required>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Images</legend>
+              <div class="form-group">
+                <label for="exteriorPhotos">Exterior Photos</label>
+                <input type="file" class="form-control-file" id="exteriorPhotos" name="exteriorPhotos" multiple>
+              </div>
+              <div class="form-group">
+                <label for="interiorPhotos">Interior Photos</label>
+                <input type="file" class="form-control-file" id="interiorPhotos" name="interiorPhotos" multiple>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Maintenance and Condition</legend>
+              <div class="form-group">
+                <label for="currentMileage">Current Mileage</label>
+                <input type="number" class="form-control" id="currentMileage" name="currentMileage" required
+                  placeholder="eg. 40">
+              </div>
+              <div class="form-group">
+                <label for="serviceHistory">Service History</label>
+                <textarea class="form-control" id="serviceHistory" name="serviceHistory"
+                  placeholder="10 days before"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="damageDetails">Damage Details</label>
+                <textarea class="form-control" id="damageDetails" name="damageDetails"
+                  placeholder="Screatch of Mirror"></textarea>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-col">
+            <fieldset>
+              <legend>Miscellaneous</legend>
+              <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes" name="notes"
+                  placeholder="Our Car has Automatic driving Facillity"></textarea>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register Car</button>
+      </form>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
