@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* overflow-y: hidden; */
+}
+
+.display-none {
+    display: none;
+}
+
+.icons {
+    display: none;
+}
+
+nav {
+    width: 99vw;
+    height: 10vh;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav img {
+    display: none;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    height: 100%;
+    width: 50%;
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0px;
+    left: 0;
+    justify-content: flex-start;
+    align-items: center;
+    transition-duration: 0.5s;
+}
+
+nav ul li {
+    list-style: none;
+    height: 40px;
+    width: 100px;
+    border-radius: 7px;
+}
+
+nav ul li a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    color: black;
+}
+
+nav .bxs-user-circle {
+    font-size: 60px;
+    margin-top: 0;
+}
+
+nav .bxs-user-circle:hover {
+    cursor: pointer;
+}
+
+nav ul li a:hover {
+    transform: scale(1.2);
+    color: orangered;
+}
+
+@media only screen and (max-width: 900px) {
+    .icons {
+        display: block;
+    }
+
+    nav img {
+        display: inline-block;
+        height: 35px;
+        width: 40px;
+        padding: 4px;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        z-index: 999;
+        border-radius: 3px;
+    }
+
+    nav {
+        height: 10vh;
+        /* width: 30vw; */
+        border: none;
+        /* border: 1px solid black; */
+        border-radius: 7px;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+        gap: 4em;
+        transform: translateX(-110%);
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        background-color: pink;
+        height: 100%;
+        width: 30%;
+        position: absolute;
+        top: 0px;
+        z-index: 998;
+    }
+
+    nav ul li {
+        position: relative;
+        top: 4em;
+        /* color: white; */
+    }
+
+    nav h1 {
+        position: relative;
+        top: 5px;
+    }
+
+    .show-menu {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .icons {
+        height: 40px;
+        width: 45px;
+        /* border: 1px solid black; */
+    }
+}
+
+
+
+/* Cars Collection part  */
+
+body .cars {
+    height: auto;
+    width: 99vw;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+body .container {
+    margin: 0;
+    padding: 10px;
+}
+
+body .cars .card {
+    padding: 10px;
+    min-width: 18rem;
+    min-height: 25rem
+}
+
+body .cars .card .card-img-top {
+    height: 150px;
+    /* margin: 10px; */
+}
+
+
+.card {
+    width: 18rem;
+    /* Minimum width for each card */
+    height: 25rem;
+    /* Minimum height for each card */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 100%;
+    /* Restrict max height of card body */
+    overflow: hidden;
+    /* Hide overflow content */
+}
+
+.card-text {
+    font-size: 10px;
+    /* Initial font size */
+    flex-grow: 1;
+    /* overflow: hidden; */
+}
+
+.bookAndDetails {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-body .book {
+    border: 1px solid black;
+    background-color: rgba(0, 115, 255, 0.927);
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    padding: 3px;
+    transition-duration: 0.3s;
+    height: 27px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-body .book:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
+.card-body .more-details {
+    transition-duration: 0.4s;
+}
+
+.card-body .more-details:hover {
+    transform: scale(1.1);
+    color: orangered;
+}

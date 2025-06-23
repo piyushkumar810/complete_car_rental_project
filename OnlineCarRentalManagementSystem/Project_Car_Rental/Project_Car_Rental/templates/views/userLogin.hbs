@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login page</title>
+  <!-- Link The Css File -->
+  <link rel="stylesheet" href="css/userLogin.css">
+
+  <!-- Using Box Icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    .bx:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <span class="icon-close">
+      <i class='bx bx-arrow-back bx-flip-vertical' style='color:#fde475'></i>
+      <a href="/home" style="width: 100%;height: 100%; display: block;    position: relative;
+    top: 12px;"> Home </a>
+    </span>
+    <div class="form-box login">
+      <h2>Login</h2>
+      <form action="/userLogin" method="POST">
+        <div class="input-box">
+          <span class="icon"><i class='bx bxs-envelope'></i></span>
+          <input type="email" name="Email" value="" class="email" required="required" />
+          <label for="Email">Email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><i class='bx bxs-hide Hide-Password' class="Hide-Password"></i></span>
+          <input type="password" required name="password" value="" required="required" id="CP" value="" />
+          <label for="Password">password</label>
+        </div>
+        <div class="remember-forgot   ">
+          <a href="/forgetPassword">Forgot password ?</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <div class="login-register">
+          <p> Don't have an account?
+            <a href="/userRegistration" class="register-link">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{!--
+  <script src="js/userLogInValidation.js"></script> --}}
+</body>
+<script>
+  let Hide_Password = document.querySelector(".Hide-Password");
+  document.addEventListener("DOMContentLoaded", function () {
+
+    Hide_Password.addEventListener("click", function () {
+
+      const create_Password = document.querySelector("#CP");
+
+      if (create_Password.type === "password") {
+        create_Password.type = "text";
+        Hide_Password.classList.toggle("bxs-show");
+        Hide_Password.classList.toggle("bxs-hide");
+
+      } else {
+        create_Password.type = "password";
+        Hide_Password.classList.toggle("bxs-show");
+        Hide_Password.classList.toggle("bxs-hide");
+      }
+    });
+  });
+</script>
+
+</html>

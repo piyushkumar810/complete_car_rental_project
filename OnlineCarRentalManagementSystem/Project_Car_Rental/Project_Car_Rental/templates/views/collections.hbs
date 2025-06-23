@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/CollectionStyle.css">
+    <style>
+        /* Custom CSS for card minimum width and height */
+        .card {
+            min-width: 18rem;
+            /* Minimum width for each card */
+            min-height: 25rem;
+            /* Minimum height for each card */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header And Navigation -->
+    {{>header}}
+    <!-- Cars Collection -->
+    <div class="container ">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 cars">
+            {{#each data}}
+            <div class="col">
+                <div class="card">
+                    <img src="https://img.freepik.com/free-photo/luxurious-car-parked-highway-with-illuminated-headlight-sunset_181624-60607.jpg"
+                        class="card-img-top" alt="Car Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{model}}</h5>
+                        <p class="card-text">{{serviceHistory}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Daily Rental Price: {{dailyRentalRate}}</li>
+                        <li class="list-group-item">This car is: {{engineType}}</li>
+                    </ul>
+                    <div class="card-body bookAndDetails">
+                        <a href="/create-order" class="card-link book">Book Now</a>
+                        <a href="/home" class="card-link more-details">More details...</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <script src="js/collectionScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
