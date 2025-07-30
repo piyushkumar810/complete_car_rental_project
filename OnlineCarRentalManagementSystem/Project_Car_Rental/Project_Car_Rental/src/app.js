@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 require("./db/connection");
 const User = require("./models/UserModel");
+const History = require("./models/bookingHistory");
 const Car = require("./models/carModel");
 const hbs = require("hbs");
 const bcrypt = require("bcryptjs");
@@ -16,6 +17,7 @@ const auth = require("./middleware/authentication");
 const verifyEmail = require("./middleware/emailVerification");
 const session = require("express-session");
 const Razorpay = require("razorpay");
+const { log } = require("console");
 // ******** Paths *************
 
 // Static path for public directory 
@@ -475,12 +477,30 @@ app.post("/admin/makeEntry", async (req, res) => {
 
 // **************** Order Creation ***************
 app.get('/create-order', requireLogin, (req, res) => {
-
-
-
   res.render('orders');
-
 });
+// app.post('/create-order', requireLogin, async (req, res) => {
+//   try {
+
+//     const book = new History({
+//       state: req.body.state,
+//       district: req.body.district,
+//       pinCode: req.body.code,
+//       city: req.body.city,
+//       houseNo: req.body.houseNumber,
+//       purpose: req.body.purpose,
+//       hours: req.body.time,
+//       contact: req.body.callingNumber,
+//       email: "dummy@example.com", // You may need to collect this in the form
+//       time: req.body.date
+//     });
+//     await book.save();
+//     console.log("Booked");
+//   } catch (e) {
+//     // res.send("not booked ");
+//     console.log("error", e)
+//   }
+// });
 
 // **************** Order Creation ***************
 app.post('/create-order', async (req, res) => {
@@ -489,8 +509,20 @@ app.post('/create-order', async (req, res) => {
     key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
   const time = req.body.time;
-  // console.log(process.env.RAZORPAY_KEY_ID);
-  // console.log(process.env.RAZORPAY_KEY_SECRET);
+  const email = req.session.email;
+  const book = new History({
+    state: req.body.state,
+    district: req.body.district,
+    pinCode: req.body.code,
+    city: req.body.city,
+    houseNo: req.body.houseNumber,
+    purpose: req.body.purpose,
+    hours: time,
+    contact: req.body.callingNumber,
+    email: email,
+    time: req.body.date
+  });
+
   const options = {
     amount: req.body.time * 500, // Amount in the smallest currency unit
     currency: 'INR',
@@ -499,16 +531,16 @@ app.post('/create-order', async (req, res) => {
   };
   try {
     const response = await razorpay.orders.create(options);
-    const email = req.session.email;
-    console.log(email);
+    // console.log(email);
     const user = await User.findOne({ email });
-    console.log(user);
+    // console.log(user);
     res.render('payment', {
       order_id: response.id,
       currency: response.currency,
       amount: response.amount,
       key_id: process.env.RAZORPAY_KEY_ID,
     });
+    await book.save();
   } catch (error) {
     console.error('Error creating order:', error);
     res.status(500).send('Internal Server error');
