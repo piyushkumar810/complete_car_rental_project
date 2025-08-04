@@ -297,8 +297,8 @@ app.post("/userLogin", async (req, res) => {
     const email = req.body.Email;
     const password = req.body.password;
     const isUser = await User.findOne({ email });
-    console.log(password);
-    console.log(isUser);
+    // console.log(password);
+    // console.log(isUser);
     if (isUser) {
       const isMatch = await bcrypt.compare(password, isUser.password);
       if (isMatch) {

@@ -1,2 +1,0 @@
-const verifyEmail = require("");
-verifyEmail();
